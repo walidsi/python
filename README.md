@@ -1,1 +1,1 @@
-# Python code snippets from different books.
+# Python code and tutorials code.
