@@ -1,3 +1,5 @@
 {
-    
+    "conventionalCommits.scopes": [
+        "Git"
+    ]
 }
