@@ -20,5 +20,13 @@ For more info, refer to:
 
 https://www.roelpeters.be/virtualenv-venv-choose-python-version/
 
+## Installing a package in a specific version/enviornment of python
 
+#### The system default python:
+```$ python -m pip install fish```
 
+#### A virtualenv's python:
+```$ .env/bin/python -m pip install fish```
+
+#### A specific version of python:
+```$ python3.6 -m pip install fish```
