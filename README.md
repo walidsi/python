@@ -1,6 +1,6 @@
 # Python code and tutorials code.
 
-## How to create python virtual environment for your code on Ubuntu
+## How to create a python virtual environment for your code on Ubuntu
 From outside any python virtual environment (i.e. from system wide python), 
 use the following command to create a virtual environment based on user installed
 python.
