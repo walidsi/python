@@ -2,6 +2,8 @@ from collections import deque
 import pprint
 import json
 
+from sqlalchemy import false, true
+
 
 def reverse_phrase(phrase: str) -> str:
     """Reverses the words in a phrase
@@ -58,6 +60,14 @@ def count_letters(sentence: str) -> dict:
     return count
 
 
+def is_prime(num: int) -> bool:
+    sqrt_num = int(num ** 0.5)
+    for i in range(2, sqrt_num + 1):
+        if num % i == 0:
+            return False
+    return True
+
+
                 
 ##############################################################
 # main()
@@ -87,6 +97,11 @@ def main():
     
     print(json.dumps(count, indent=4))
     
+    print(is_prime(11))
+    print(is_prime(12))
+    print(is_prime(13))
+    print(is_prime(122))
+
     
 if __name__ == "__main__":
     main()
