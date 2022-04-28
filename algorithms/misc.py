@@ -68,7 +68,31 @@ def is_prime(num: int) -> bool:
     return True
 
 
-                
+def find_primes(m):
+    arr = [i for i in range(2, m+1)]
+
+    index = 0
+    while True:
+        length = len(arr)
+
+        if index == length:
+            break
+
+        index2 = index+1
+
+        while index2 < length:
+            if arr[index2] % arr[index] == 0:
+                arr.pop(index2)
+                length -= 1
+            else:
+                index2 += 1
+
+        index += 1
+
+    return arr
+
+
+
 ##############################################################
 # main()
 #
@@ -101,6 +125,8 @@ def main():
     print(is_prime(12))
     print(is_prime(13))
     print(is_prime(122))
+
+    print(find_primes(100))
 
     
 if __name__ == "__main__":
