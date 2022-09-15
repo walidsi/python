@@ -1,6 +1,17 @@
 {
     "configurations": [
         {
+            "name": "Python: FastAPI",
+            "type": "python",
+            "request": "launch",
+            "module": "uvicorn",
+            "args": [
+                "main:app"
+            ],
+            "jinja": true,
+            "justMyCode": true
+        },
+        {
             "name": "Docker: Python - Fastapi",
             "type": "docker",
             "request": "launch",
