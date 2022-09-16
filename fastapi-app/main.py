@@ -18,7 +18,11 @@ async def root():
 
 @app.post("/items")
 async def add(item: Item):
-    print('Recevied this: ', item)
+    return 'Recevied this: ' + str(item)
+
+@app.get("/about")
+def about():
+    return {"Author": "Walid Ismail"}
     
 
 # to copy updates of this file to a running container, use the following command:
