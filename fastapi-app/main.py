@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
-from typing import Union
+from typing import Union, Optional
 
 class Item(BaseModel):
     name: str
@@ -13,12 +13,28 @@ app = FastAPI()
 
 
 @app.get("/")
-async def root():
-    return {"message": "Hello World 2025"}
+def root():
+    return {"data": "blog list"}
 
-@app.post("/items")
-async def add(item: Item):
-    return 'Recevied this: ' + str(item)
+@app.get("/blog")
+def index(limit: int = 10, published: bool = True, sort: Optional[str] = None):
+    if published:
+        return {"data": f"{limit} published blogs from db"}
+    else:
+        return {"data": f"{limit} blogs from db"}
+
+@app.get("/blog/unpublished")
+def unpublished():
+    return {'data': 'all unpublished blogs'}
+
+@app.get("/blog/{id}")
+def show(id: int):
+    return {"data": f"blog {id}"}
+
+@app.get("/blog/{id}/comments")
+def comments(id: int, limit=10):
+    return {"data": f'blog {id}',
+            "comments": [i for i in range(limit)]}    
 
 @app.get("/about")
 def about():
