@@ -32,7 +32,7 @@ def show(id: int):
     return {'data': f'blog {id}'}
 
 @app.get('/blog/{id}/comments')
-def comments(id: int, limit=10):
+def comments(id: int, limit: int = 10):
     return {'data': f'blog {id}',
             'comments': [i for i in range(limit)]}    
 
