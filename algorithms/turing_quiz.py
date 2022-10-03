@@ -22,7 +22,7 @@ def isValid(s: str) -> bool:
     return result
 
 
-if __name__ == '__main__':
+def main() -> None:
     while True:
         line = input()
 
@@ -33,3 +33,7 @@ if __name__ == '__main__':
             print('Valid')
         else:
             print('Invalid')
+
+
+if __name__ == '__main__':
+    main()
