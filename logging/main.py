@@ -5,9 +5,9 @@ FILE_LOGGING = True
 FORMATTER_STRING = '%(asctime)s:%(filename)s:%(levelname)s:%(message)s'
 
 # Default call witll create a stream logger
-logging.basicConfig(level=logging.DEBUG, format='%(message)s') 
+logging.basicConfig(level=logging.DEBUG, format='%(message)s')
 
-if FILE_LOGGING: # add file logger as well
+if FILE_LOGGING:  # add file logger as well
     root = logging.getLogger()
     file_handler = logging.FileHandler('main.log')
     file_handler.setFormatter(logging.Formatter(FORMATTER_STRING))

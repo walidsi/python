@@ -1,8 +1,9 @@
 import logging
 
-logging.basicConfig(filename='employee.log', 
+logging.basicConfig(filename='employee.log',
                     level=logging.INFO,
                     format='%(asctime)s:%(levelname)s:%(message)s')
+
 
 class Employee:
     def __init__(self, first, last) -> None:
