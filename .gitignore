@@ -3,3 +3,6 @@ __pycache__
 flask-env
 
 logging/main.log
+exe/dist
+exe/build
+exe/*.spec
