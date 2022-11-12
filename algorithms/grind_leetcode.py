@@ -23,12 +23,6 @@ def two_sum2(nums: List[int], target: int) -> List[int]:
             val_idx[n] = i
 
 
-assert (two_sum2([3, 2, 4], 6) == [1, 2])
-
-print(timeit.timeit('two_sum([3, 12, 44, 11, 6, 3, 22, 11, 33, 44, 55, 66, 1, 4], 5)', globals=globals()))
-print(timeit.timeit('two_sum2([3, 12, 44, 11, 6, 3, 22, 11, 33, 44, 55, 66, 1, 4], 5)', globals=globals()))
-
-
 def isValid(s: str) -> bool:
     if (len(s) % 2 != 0):
         return False
@@ -53,8 +47,10 @@ def isValid(s: str) -> bool:
         return False
 
 
-assert (isValid('[](){}') == True)
-assert (isValid('[()]{}') == True)
-assert (isValid('[(]{}]') == False)
-assert (isValid('()') == True)
-assert (isValid("(){}}{") == False)
+def main():
+    print(timeit.timeit('two_sum([3, 12, 44, 11, 6, 3, 22, 11, 33, 44, 55, 66, 1, 4], 5)', globals=globals()))
+    print(timeit.timeit('two_sum2([3, 12, 44, 11, 6, 3, 22, 11, 33, 44, 55, 66, 1, 4], 5)', globals=globals()))
+
+
+if __name__ == "__main__":
+    main()
