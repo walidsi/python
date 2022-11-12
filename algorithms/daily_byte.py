@@ -4,7 +4,7 @@ import timeit
 def gb_reverse_string(input: str) -> str:
     # A string is an immutable object is python, so how best can I do this task??
     reverse: str = ''
-    for i in range(-1, -len(input)-1, -1):
+    for i in range(-1, -len(input) - 1, -1):
         reverse = reverse + input[i]
 
     return reverse
@@ -22,13 +22,6 @@ def gb_reverse_string_2(input: str) -> str:
 
 def gb_reverse_string_3(input: str) -> str:
     return input[::-1]  # Use slicing syntax. Fastest way by far!
-
-
-print(timeit.timeit('gb_reverse_string("Hello World 2022!")', globals=globals()))
-print(timeit.timeit('gb_reverse_string_2("Hello World 2022!")', globals=globals()))
-print(timeit.timeit('gb_reverse_string_3("Hello World 2022!")', globals=globals()))
-
-print(gb_reverse_string_2('Hello World'))
 
 
 def is_palindrome(s: str) -> bool:
@@ -50,7 +43,11 @@ def is_palindrome(s: str) -> bool:
     return True
 
 
-assert (is_palindrome('level') == True)
-assert (is_palindrome('algorithm') == False)
-assert (is_palindrome('A man, a plan, a canal: Panama.') == True)
-assert (is_palindrome('A man , nam A') == True)
+def main():
+    print(timeit.timeit('gb_reverse_string("Hello World 2022!")', globals=globals()))
+    print(timeit.timeit('gb_reverse_string_2("Hello World 2022!")', globals=globals()))
+    print(timeit.timeit('gb_reverse_string_3("Hello World 2022!")', globals=globals()))
+
+
+if __name__ == "__main__":
+    main()
