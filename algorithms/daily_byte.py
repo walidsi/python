@@ -29,3 +29,28 @@ print(timeit.timeit('gb_reverse_string_2("Hello World 2022!")', globals=globals(
 print(timeit.timeit('gb_reverse_string_3("Hello World 2022!")', globals=globals()))
 
 print(gb_reverse_string_2('Hello World'))
+
+
+def is_palindrome(s: str) -> bool:
+    left = 0
+    right = len(s) - 1
+
+    while left <= right:
+        if s[left].isalnum() and s[right].isalnum():
+            if s[left].lower() != s[right].lower():
+                return False
+            else:
+                left += 1
+                right -= 1
+        elif s[left].isalnum() == False:
+            left += 1
+        elif s[right].isalnum() == False:
+            right -= 1
+
+    return True
+
+
+assert (is_palindrome('level') == True)
+assert (is_palindrome('algorithm') == False)
+assert (is_palindrome('A man, a plan, a canal: Panama.') == True)
+assert (is_palindrome('A man , nam A') == True)
