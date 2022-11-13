@@ -10,17 +10,17 @@ def two_sum(nums: List[int], target: int) -> List[int]:
 
 
 def two_sum2(nums: List[int], target: int) -> List[int]:
-    val_idx = {}
+    num_idx_map = {}
 
     # Order O(n) by using a hash table ro store looped over integers, clever!!
     for i, n in enumerate(nums):
 
         diff = target - n
 
-        if diff in val_idx:
-            return [val_idx[diff], i]
+        if diff in num_idx_map:
+            return [num_idx_map[diff], i]
         else:
-            val_idx[n] = i
+            num_idx_map[n] = i
 
 
 def isValid(s: str) -> bool:
