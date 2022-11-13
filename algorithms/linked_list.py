@@ -1,19 +1,22 @@
+from typing import Optional
+
+
 class Node:
     def __init__(self, value) -> None:
         self.val = value
-        self.next_node = None
+        self.next_node: Optional[Node] = None
 
 
 class LinkedList:
     def __init__(self) -> None:
-        self.head = None
+        self.head: Optional[Node] = None
 
     def add_node(self, node):
         if self.head is None:
             self.head = node
             self.head.next_node = None
         else:
-            last = self.head
+            last: Node = self.head
             while last.next_node is not None:
                 last = last.next_node
 
@@ -25,7 +28,7 @@ class LinkedList:
             self.head = node
             self.head.next_node = None
         else:
-            last = self.head
+            last: Node = self.head
             while last.next_node is not None:
                 last = last.next_node
 
@@ -34,7 +37,7 @@ class LinkedList:
     def __repr__(self) -> str:
         arr = list()
 
-        curr = self.head
+        curr: Optional[Node] = self.head
 
         while curr is not None:
             arr.append(curr.val)
@@ -43,7 +46,7 @@ class LinkedList:
         return str(arr)
 
 
-def mergeTwoLists(list1, list2):
+def mergeTwoLists(list1: Optional[LinkedList], list2: Optional[LinkedList]) -> Optional[LinkedList]:
 
     if list1 is None:
         return list2
@@ -53,15 +56,15 @@ def mergeTwoLists(list1, list2):
 
     merged = LinkedList()
 
-    last = None
+    last: Optional[Node] = None
 
-    list1_node = list1.head
-    list2_node = list2.head
+    list1_node: Optional[Node] = list1.head
+    list2_node: Optional[Node] = list2.head
 
     while list1_node is not None and list2_node is not None:
         curr = list1_node if (list1_node.val <= list2_node.val) else list2_node
 
-        next = curr.next_node
+        next: Optional[Node] = curr.next_node
         merged.add_node(curr)
         curr = next
 
