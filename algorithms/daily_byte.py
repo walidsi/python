@@ -43,6 +43,26 @@ def is_palindrome(s: str) -> bool:
     return True
 
 
+def is_closed_loop(s: str):
+    x: int = 0
+    y: int = 0
+
+    for c in s:
+        if c == 'R':
+            x += 1
+        elif c == 'L':
+            x -= 1
+        elif c == 'U':
+            y += 1
+        elif c == 'D':
+            y -= 1
+    closed_loop: bool = False
+    if x == 0 and y == 0:
+        closed_loop = True
+
+    return closed_loop
+
+
 def main():
     print(timeit.timeit('gb_reverse_string("Hello World 2022!")', globals=globals()))
     print(timeit.timeit('gb_reverse_string_2("Hello World 2022!")', globals=globals()))

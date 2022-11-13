@@ -13,6 +13,11 @@ class TestDailyByte(unittest.TestCase):
         self.assertEqual(gb_reverse_string('Hello World'), 'dlroW olleH', 'Failed')
         self.assertEqual(gb_reverse_string_2('Hello World'), 'dlroW olleH', 'Failed')
 
+    def test_is_closed_loop(self):
+        self.assertEqual(is_closed_loop('LR'), True, "Failed is_closed_loop")
+        self.assertEqual(is_closed_loop('URURD'), False, "Failed is_closed_loop")
+        self.assertEqual(is_closed_loop('RUULLDRD'), True, "Failed is_closed_loop")
+
 
 if __name__ == "__main__":
     unittest.main()
