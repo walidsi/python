@@ -3,14 +3,21 @@ import timeit
 
 
 def two_sum(nums: List[int], target: int) -> List[int]:
+
+    result = []
     for index in range(len(nums)):  # Order O(n^2)
         for index2 in range(index + 1, len(nums)):
             if nums[index] + nums[index2] == target:
-                return [index, index2]
+                result = [index, index2]
+                break
+
+    return result
 
 
 def two_sum2(nums: List[int], target: int) -> List[int]:
     num_idx_map = {}
+
+    result = []
 
     # Order O(n) by using a hash table ro store looped over integers, clever!!
     for i, n in enumerate(nums):
@@ -18,9 +25,12 @@ def two_sum2(nums: List[int], target: int) -> List[int]:
         diff = target - n
 
         if diff in num_idx_map:
-            return [num_idx_map[diff], i]
+            result = [num_idx_map[diff], i]
+            break
         else:
             num_idx_map[n] = i
+
+    return result
 
 
 def isValid(s: str) -> bool:
