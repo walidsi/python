@@ -1,4 +1,4 @@
-from typing import List
+from typing import List, Optional
 import timeit
 
 
@@ -45,6 +45,53 @@ def isValid(s: str) -> bool:
         return True
     else:
         return False
+
+
+# Definition for singly-linked list.
+class ListNode:
+    def __init__(self, val=0, next=None):
+        self.val = val
+        self.next = next
+
+
+def mergeTwoLists(list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
+
+    if list1 is None:
+        return list2
+
+    if list2 is None:
+        return list1
+
+    start: ListNode = None
+    last: ListNode = None
+    curr: ListNode = None
+
+    while list1 is not None and list2 is not None:
+        curr = list1 if (list1.val <= list2.val) else list2
+
+        if start is None:
+            start = curr
+            curr = curr.next
+            start.next = None
+            last = start
+        else:
+            last.next = curr
+            last = last.next
+            curr = curr.next
+            last.next = None
+
+        if (list1.val <= list2.val):
+            list1 = curr
+        else:
+            list2 = curr
+
+    if list1 is not None:
+        last.next = list1
+
+    if list2 is not None:
+        last.next = list2
+
+    return start
 
 
 def main():
