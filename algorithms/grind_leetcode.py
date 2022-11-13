@@ -72,23 +72,22 @@ def mergeTwoLists(list1: Optional[ListNode], list2: Optional[ListNode]) -> Optio
     if list2 is None:
         return list1
 
-    start: ListNode = None
-    last: ListNode = None
-    curr: ListNode = None
+    # Initialization
+    start = list1 if (list1.val <= list2.val) else list2
+    last = start
+    if (list1.val <= list2.val):
+        list1 = start.next
+    else:
+        list2 = start.next
+    start.next = None
 
     while list1 is not None and list2 is not None:
         curr = list1 if (list1.val <= list2.val) else list2
 
-        if start is None:
-            start = curr
-            curr = curr.next
-            start.next = None
-            last = start
-        else:
-            last.next = curr
-            last = last.next
-            curr = curr.next
-            last.next = None
+        last.next = curr
+        last = last.next
+        curr = curr.next
+        last.next = None
 
         if (list1.val <= list2.val):
             list1 = curr
