@@ -18,6 +18,12 @@ class TestDailyByte(unittest.TestCase):
         self.assertEqual(is_closed_loop('URURD'), False, "Failed is_closed_loop")
         self.assertEqual(is_closed_loop('RUULLDRD'), True, "Failed is_closed_loop")
 
+    def test_is_capitalized_correctly(self):
+        self.assertEqual(is_capitalized_correctly('USA'), True, "Failed is_capitalized_correctly")
+        self.assertEqual(is_capitalized_correctly('Calvin'), True, "Failed is_capitalized_correctly")
+        self.assertEqual(is_capitalized_correctly('compUter'), False, "Failed is_capitalized_correctly")
+        self.assertEqual(is_capitalized_correctly('coding'), True, "Failed is_capitalized_correctly")
+
 
 if __name__ == "__main__":
     unittest.main()

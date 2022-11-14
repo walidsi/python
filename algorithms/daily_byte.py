@@ -63,6 +63,42 @@ def is_closed_loop(s: str):
     return closed_loop
 
 
+def is_capitalized_correctly(s: str) -> bool:
+    capitalized_correctly: bool = False
+    first_char_is_captial = False
+    has_middle_capital = False
+    has_middle_small = False
+    all_caps = True
+    no_caps = True
+
+    if s[0] == s[0].upper():
+        first_char_is_captial = True
+    else:
+        first_char_is_captial = False
+        all_caps = False
+
+    for i in range(1, len(s)):
+        if s[i] == s[i].upper():
+            has_middle_capital = True
+            no_caps = False
+        elif s[i] == s[i].lower():
+            has_middle_small = True
+            all_caps = False
+
+    if all_caps == True:
+        capitalized_correctly = True
+    elif no_caps == True:
+        capitalized_correctly = True
+    elif first_char_is_captial == True and has_middle_capital == False:
+        capitalized_correctly = True
+    else:
+        capitalized_correctly = False
+
+    return capitalized_correctly
+
+########################### main() ####################################################
+
+
 def main():
     print(timeit.timeit('gb_reverse_string("Hello World 2022!")', globals=globals()))
     print(timeit.timeit('gb_reverse_string_2("Hello World 2022!")', globals=globals()))
