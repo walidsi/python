@@ -27,6 +27,16 @@ class TestGrindLeetCode(unittest.TestCase):
         self.assertEqual(max_profit([1, 2]), 1, "Wrong answer")
         self.assertEqual(max_profit([2, 4, 1]), 2, "Wrong answer")
 
+    def test_invert_tree(self):
+        # Empty tree
+        self.assertEqual(invert_tree(None), None, "Wrong answer")
+        one = TreeNode(1)  # No children
+        self.assertEqual(invert_tree(one), one, "Wrong answer")
+        # TODO: this is all I can write as unit tests right now for the binary tree inversion
+        # I need a lot of thinking on how to code the building of the tree itself and how to code
+        # part that will verify that it is inverted correctly. i.e. what leetcode does to check the
+        # correctness of my implementation 😉
+
 
 if __name__ == "__main__":
     unittest.main()

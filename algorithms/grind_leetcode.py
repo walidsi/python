@@ -143,6 +143,46 @@ def max_profit(prices: List[int]) -> int:
 
     return max_profit
 
+# Definition for a binary tree node.
+
+
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+
+def invert_tree(root: Optional[TreeNode]) -> Optional[TreeNode]:
+    """Invert a binary tree such that for each node, the left and right child exchange places
+
+    Args:
+        root (Optional[TreeNode]): reference to the first node
+
+    Returns:
+        Optional[TreeNode]: reference to the first node of the inverted tree
+    """
+
+    if root is None:  # Base condition 1
+        return None
+
+    if root.left is None and root.right is None:  # Base condition 2
+        return root
+
+    # Invert children first using recurcive calls
+    invert_tree(root.left)
+    invert_tree(root.right)
+
+    # invert current node
+    tmp = root.left
+    root.left = root.right
+    root.right = tmp
+
+    return root
+
+
+######################## main() ##############################################################################
+
 
 def main():
     print(timeit.timeit('two_sum([3, 12, 44, 11, 6, 3, 22, 11, 33, 44, 55, 66, 1, 4], 5)', globals=globals()))
