@@ -124,35 +124,22 @@ def max_profit(prices: List[int]) -> int:
     if length <= 1:
         return max_profit
 
-    buy: int = 0
-    sell: int = -1
-
-    global_min = 0
     global_min_idx = -1
 
     # Set days for first sub array
     if prices[0] < prices[1]:
-        buy = 0
-        sell = 1
         global_min_idx = 0
     else:
-        buy = 1
-        sell = 1
         global_min_idx = 1
 
-    curr_profit = prices[sell] - prices[buy]
-    max_profit = curr_profit
+    max_profit = max(0, prices[1] - prices[global_min_idx])
 
     for day in range(2, len(prices)):
         profit = prices[day] - prices[global_min_idx]
-        if profit >= max_profit:
-            sell = day
-            buy = global_min_idx
+        if profit >= max_profit:  # Found new maximum profit
             max_profit = profit
-        elif prices[day] < prices[global_min_idx]:
+        elif prices[day] < prices[global_min_idx]:  # Found new global minimum
             global_min_idx = day
-
-    max_profit = prices[sell] - prices[buy]
 
     return max_profit
 
