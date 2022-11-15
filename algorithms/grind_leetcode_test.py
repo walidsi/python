@@ -36,6 +36,16 @@ class TestGrindLeetCode(unittest.TestCase):
         # I need a lot of thinking on how to code the building of the tree itself and how to code
         # part that will verify that it is inverted correctly. i.e. what leetcode does to check the
         # correctness of my implementation 😉
+        # Tip: If you invert a binary tree twice, you should get the original back if your algorithm
+        # is bug free.
+
+    def test_is_anagram(self):
+        self.assertEqual(is_anagram("anagram", "nagaram"), True, "Failed is_anagram")
+        self.assertEqual(is_anagram("rat", "cat"), False, "Failed is_anagram")
+
+    def test_search(self):
+        self.assertEqual(search([-1, 0, 3, 5, 9, 12], 9), 4, "Failed search")
+        self.assertEqual(search([-1, 0, 3, 5, 9, 12], 2), -1, "Failed search")
 
 
 if __name__ == "__main__":

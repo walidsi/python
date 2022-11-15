@@ -181,6 +181,72 @@ def invert_tree(root: Optional[TreeNode]) -> Optional[TreeNode]:
     return root
 
 
+def is_anagram(s: str, t: str) -> bool:
+    """An Anagram is a word or phrase formed by rearranging the letters of a different word or phrase, 
+    typically using all the original letters exactly once.
+    Example: Given two strings s and t, return true if t is an anagram of s, and false otherwise
+
+    Args:
+        s (str): source string
+        t (str): anagram string
+
+    Returns:
+        bool: return true if t is an anagram of s, and false otherwise
+    """
+    if len(s) != len(t):
+        return False
+
+    s_map = {}
+    t_map = {}
+
+    for i in range(len(s)):
+        if s[i] not in s_map:
+            s_map[s[i]] = 1
+        else:
+            s_map[s[i]] += 1
+
+        if t[i] not in t_map:
+            t_map[t[i]] = 1
+        else:
+            t_map[t[i]] += 1
+
+    if s_map == t_map:
+        return True
+    else:
+        return False
+
+
+def search(nums: List[int], target: int) -> int:
+    """Searches for integer  in an array of integers nums which is sorted in ascending order,  
+
+    Args:
+        nums (List[int]): sorted array of integer
+        target (int): integer to search for in nums
+
+    Returns:
+        int: If target exists in nums, return its index. Otherwise, return -1
+    """
+    index = -1
+
+    if len(nums) == 0:
+        return index
+
+    left: int = 0
+    right: int = len(nums) - 1
+
+    while left <= right:
+        middle = (left + right) // 2
+
+        if nums[middle] < target:
+            left = middle + 1
+        elif nums[middle] > target:
+            right = middle - 1
+        else:
+            index = middle
+            break
+
+    return index
+
 ######################## main() ##############################################################################
 
 
