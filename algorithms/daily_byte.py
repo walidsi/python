@@ -96,6 +96,49 @@ def is_capitalized_correctly(s: str) -> bool:
 
     return capitalized_correctly
 
+
+def binary_sum(s1: str, s2: str) -> str:
+    """Return the sum of two binary strings i.e. strings of 0s and 1s.
+    Example: "100" + "1", return "101"
+    """
+    total: str = ''
+
+    # Ammend leading zeros to make the two strings of the same length for easier handling
+    s1_len = len(s1)
+    s2_len = len(s2)
+    if s1_len > s2_len:
+        s2 = '0' * (s1_len - s2_len) + s2
+    else:
+        s1 = '0' * (s2_len - s1_len) + s1
+
+    carry = '0'
+    for i in range(len(s1) - 1, -1, -1):
+        if carry == '0':
+            if s1[i] == '0' and s2[i] == '0':
+                total = '0' + total
+            elif s1[i] == '1' and s2[i] == '0':
+                total = '1' + total
+            elif s1[i] == '0' and s2[i] == '1':
+                total = '1' + total
+            elif s1[i] == '1' and s2[i] == '1':
+                total = '0' + total
+                carry = '1'
+        else:
+            if s1[i] == '0' and s2[i] == '0':
+                total = '1' + total
+                carry = '0'
+            elif s1[i] == '1' and s2[i] == '0':
+                total = '0' + total
+            elif s1[i] == '0' and s2[i] == '1':
+                total = '0' + total
+            elif s1[i] == '1' and s2[i] == '1':
+                total = '1' + total
+
+    if carry == '1':
+        total = '1' + total
+
+    return total
+
 ########################### main() ####################################################
 
 
