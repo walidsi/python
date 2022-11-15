@@ -249,11 +249,23 @@ def search(nums: List[int], target: int) -> int:
 
 
 def flood_fill(image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
+    """Fill a pixel and all 4-directionally connected pixels with the same color to a new color.
+    Flood all connected pixels of this cross as well.
+
+    Args:
+        image (List[List[int]]): input image matrix
+        sr (int): main pixel x-coordinate
+        sc (int): main pixel y-coordinate
+        color (int): the color to fill
+
+    Returns:
+        List[List[int]]: updated image
+    """
+    if image[sr][sc] == color:  # Base condition to break the recursion
+        return image
+
     old_color = image[sr][sc]  # Save old color
     image[sr][sc] = color  # Set new color for the main pixel
-
-    if old_color == color:
-        return image
 
     # Find 4-directionally connected pixels with old color and flood fill them
     if sr - 1 >= 0 and image[sr - 1][sc] == old_color:
