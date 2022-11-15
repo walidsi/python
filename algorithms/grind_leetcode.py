@@ -247,6 +247,29 @@ def search(nums: List[int], target: int) -> int:
 
     return index
 
+
+def flood_fill(image: List[List[int]], sr: int, sc: int, color: int) -> List[List[int]]:
+    old_color = image[sr][sc]  # Save old color
+    image[sr][sc] = color  # Set new color for the main pixel
+
+    if old_color == color:
+        return image
+
+    # Find 4-directionally connected pixels with old color and flood fill them
+    if sr - 1 >= 0 and image[sr - 1][sc] == old_color:
+        image = flood_fill(image, sr - 1, sc, color)
+
+    if sr + 1 < len(image) and image[sr + 1][sc] == old_color:
+        image = flood_fill(image, sr + 1, sc, color)
+
+    if sc - 1 >= 0 and image[sr][sc - 1] == old_color:
+        image = flood_fill(image, sr, sc - 1, color)
+
+    if sc + 1 < len(image[0]) and image[sr][sc + 1] == old_color:
+        image = flood_fill(image, sr, sc + 1, color)
+
+    return image
+
 ######################## main() ##############################################################################
 
 

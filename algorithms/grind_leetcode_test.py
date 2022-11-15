@@ -47,6 +47,25 @@ class TestGrindLeetCode(unittest.TestCase):
         self.assertEqual(search([-1, 0, 3, 5, 9, 12], 9), 4, "Failed search")
         self.assertEqual(search([-1, 0, 3, 5, 9, 12], 2), -1, "Failed search")
 
+    def test_flood_fill(self):
+        image = [[0, 0, 0], [0, 0, 0]]
+        sr = 0
+        sc = 0
+        color = 0
+        self.assertEqual(flood_fill(image, sr, sc, color), [[0, 0, 0], [0, 0, 0]], "Failed flood_fill")
+
+        image = [[1, 1, 1], [1, 1, 0], [1, 0, 1]]
+        sr = 1
+        sc = 1
+        color = 2
+        self.assertEqual(flood_fill(image, sr, sc, color), [[2, 2, 2], [2, 2, 0], [2, 0, 1]], "Failed flood_fill")
+
+        image = [[0, 0, 0], [0, 0, 0]]
+        sr = 1
+        sc = 0
+        color = 2
+        self.assertEqual(flood_fill(image, sr, sc, color), [[2, 2, 2], [2, 2, 2]], "Failed flood_fill")
+
 
 if __name__ == "__main__":
     unittest.main()
