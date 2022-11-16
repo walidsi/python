@@ -39,23 +39,6 @@ def to_binary_tree(items: list[int]) -> TreeNode:
     return inner()  # type:ignore
 
 
-def traverse_node(node: Optional[TreeNode], nums: list, q: deque) -> list:
-    if node == None:
-        return nums
-
-    if node.left:
-        nums.append(node.left.val)
-    elif len(q):
-        nums.append('#')
-
-    if node.right:
-        nums.append(node.right.val)
-    elif len(q):
-        nums.append('#')
-
-    return nums
-
-
 def traverse_tree(root: Optional[TreeNode]) -> list:
     """Traverse a binary tree of integers and return the values in it as a list"""
 
@@ -70,11 +53,17 @@ def traverse_tree(root: Optional[TreeNode]) -> list:
     nums.append(node.val)
 
     while (node is not None):
-        nums = traverse_node(node, nums, q)
         if node.left:
+            nums.append(node.left.val)
             q.append(node.left)
+        elif len(q):
+            nums.append('#')
+
         if node.right:
             q.append(node.right)
+            nums.append(node.right.val)
+        elif len(q):
+            nums.append('#')
 
         if len(q):
             node = q.popleft()
