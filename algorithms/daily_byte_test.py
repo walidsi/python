@@ -30,6 +30,11 @@ class TestDailyByte(unittest.TestCase):
         self.assertEqual(binary_sum('1', '0'), '1', 'Failed binary_sum')
         self.assertEqual(binary_sum('101011101', '1011111'), '110111100', 'Failed binary_sum')
 
+    def test_find_longest_common_prefix(self):
+        self.assertEqual(find_longest_common_prefix(["colorado", "color", "cold"]), 'col', "Failed!")
+        self.assertEqual(find_longest_common_prefix(["a", "b", "c"]), "", "Failed!")
+        self.assertEqual(find_longest_common_prefix(["spot", "spotty", "spotted"]), "spot", "Failed!")
+
 
 if __name__ == "__main__":
     unittest.main()

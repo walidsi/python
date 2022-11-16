@@ -1,4 +1,5 @@
 import timeit
+from typing import List
 
 
 def gb_reverse_string(input: str) -> str:
@@ -138,6 +139,26 @@ def binary_sum(s1: str, s2: str) -> str:
         total = '1' + total
 
     return total
+
+
+def find_longest_common_prefix(arr: List[str]) -> str:
+    """Given an array of strings, return the longest common prefix that is shared amongst all strings.
+    Note: you may assume all strings only contain lowercase alphabetical characters."""
+
+    low = 0
+    high = min([len(s) for s in arr])  # Get the length of the smallest string in the list
+    num = len(arr)  # Number of strings in list
+
+    prefix: str = ''
+
+    for j in range(high):
+        c = arr[0][j]
+        for i in range(1, num):
+            if arr[i][j] != c:
+                return prefix
+        prefix = prefix + c
+
+    return prefix
 
 ########################### main() ####################################################
 
