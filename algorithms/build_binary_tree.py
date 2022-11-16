@@ -22,11 +22,9 @@ class TreeNode:
         return False
 
 
-def to_binary_tree(items: list[int]) -> Optional[TreeNode]:
-    """Create BT from list of values."""
+def to_binary_tree(items: list[int]) -> TreeNode:
+    """Create BT from list of values. Assumes non empty list and that first element in list is not null"""
     n = len(items)
-    if n == 0:
-        return None
 
     def inner(index: int = 0) -> Optional[TreeNode]:
         """Closure function using recursion bo build tree"""
@@ -38,26 +36,30 @@ def to_binary_tree(items: list[int]) -> Optional[TreeNode]:
         node.right = inner(2 * index + 2)
         return node
 
-    return inner()
+    return inner()  # type:ignore
 
 
-def traverse_node(node: Optional[TreeNode], nums: List[int]) -> List[int]:
+def traverse_node(node: Optional[TreeNode], nums: list, q: deque) -> list:
     if node == None:
         return nums
 
     if node.left:
         nums.append(node.left.val)
+    elif len(q):
+        nums.append('#')
 
     if node.right:
         nums.append(node.right.val)
+    elif len(q):
+        nums.append('#')
 
     return nums
 
 
-def traverse_tree(root: Optional[TreeNode]) -> List[int]:
+def traverse_tree(root: Optional[TreeNode]) -> list:
     """Traverse a binary tree of integers and return the values in it as a list"""
 
-    nums: List[int] = list()
+    nums = list()
 
     if root is None:
         return nums
@@ -68,7 +70,7 @@ def traverse_tree(root: Optional[TreeNode]) -> List[int]:
     nums.append(node.val)
 
     while (node is not None):
-        nums = traverse_node(node, nums)
+        nums = traverse_node(node, nums, q)
         if node.left:
             q.append(node.left)
         if node.right:
@@ -79,13 +81,27 @@ def traverse_tree(root: Optional[TreeNode]) -> List[int]:
         else:
             break
 
+    # Trim trailing hashes
+    for i in range(len(nums) - 1, -1, -1):
+        if nums[i] == '#':
+            nums.pop()
+        else:
+            break
+
     return nums
 
 
 if __name__ == "__main__":
     nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
     root = to_binary_tree(nums)
-
     nums2 = traverse_tree(root)
     drawtree.draw_level_order('[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]')
+
+    print('\n')
+
+    nums = [1, 2, 3, 4, 5, 6, 7, None, None, 10]
+    root = to_binary_tree(nums)
+    nums2 = traverse_tree(root)
+    nums2_str = nums2.__repr__()
+    nums2_str = nums2_str.replace("'", "").replace(" ", "")
+    drawtree.draw_level_order(nums2_str)
