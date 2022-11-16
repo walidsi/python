@@ -285,7 +285,7 @@ def flood_fill(image: List[List[int]], sr: int, sc: int, color: int) -> List[Lis
 #         self.right = None
 
 
-def lowestCommonAncestor(root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:  # type: ignore
+def lowestCommonAncestor(root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
     """Return the LCA of p & q in tree root. If p or q are a parent / child of one 
     another then that is enough as well
     """
@@ -296,10 +296,12 @@ def lowestCommonAncestor(root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode: 
     if low <= root.val and high >= root.val:
         return root
 
-    if p.val < root.val and q.val < root.val:
-        return lowestCommonAncestor(root.left, p, q)  # type: ignore
-    elif p.val > root.val and q.val > root.val:
-        return lowestCommonAncestor(root.right, p, q)  # type: ignore
+    if root.left is not None and p.val < root.val and q.val < root.val:
+        return lowestCommonAncestor(root.left, p, q)
+    elif root.right is not None and p.val > root.val and q.val > root.val:
+        return lowestCommonAncestor(root.right, p, q)
+    else:
+        return root
 
 
 ######################## main() ##############################################################################
