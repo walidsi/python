@@ -296,9 +296,9 @@ def lowestCommonAncestor(root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
     if low <= root.val and high >= root.val:
         return root
 
-    if root.left is not None and p.val < root.val and q.val < root.val:
+    if root.left is not None and low < root.val and high < root.val:
         return lowestCommonAncestor(root.left, p, q)
-    elif root.right is not None and p.val > root.val and q.val > root.val:
+    elif root.right is not None and low > root.val and high > root.val:
         return lowestCommonAncestor(root.right, p, q)
     else:
         return root
