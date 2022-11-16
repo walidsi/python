@@ -285,7 +285,7 @@ def flood_fill(image: List[List[int]], sr: int, sc: int, color: int) -> List[Lis
 #         self.right = None
 
 
-def lowestCommonAncestor(root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
+def lowestCommonAncestor(root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:  # type: ignore
     """Return the LCA of p & q in tree root. If p or q are a parent / child of one 
     another then that is enough as well
     """
