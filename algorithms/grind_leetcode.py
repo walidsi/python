@@ -1,5 +1,6 @@
-from typing import List, Optional
+from typing import List, Optional, Tuple
 import timeit
+from build_binary_tree import TreeNode
 
 
 def two_sum(nums: List[int], target: int) -> List[int]:
@@ -146,13 +147,6 @@ def max_profit(prices: List[int]) -> int:
 # Definition for a binary tree node.
 
 
-class TreeNode:
-    def __init__(self, val=0, left=None, right=None):
-        self.val = val
-        self.left = left
-        self.right = right
-
-
 def invert_tree(root: Optional[TreeNode]) -> Optional[TreeNode]:
     """Invert a binary tree such that for each node, the left and right child exchange places
 
@@ -281,6 +275,32 @@ def flood_fill(image: List[List[int]], sr: int, sc: int, color: int) -> List[Lis
         image = flood_fill(image, sr, sc + 1, color)
 
     return image
+
+
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+
+
+def lowestCommonAncestor(root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
+    """Return the LCA of p & q in tree root. If p or q are a parent / child of one 
+    another then that is enough as well
+    """
+
+    low = min(p.val, q.val)
+    high = max(p.val, q.val)
+
+    if low <= root.val and high >= root.val:
+        return root
+
+    if p.val < root.val and q.val < root.val:
+        return lowestCommonAncestor(root.left, p, q)  # type: ignore
+    elif p.val > root.val and q.val > root.val:
+        return lowestCommonAncestor(root.right, p, q)  # type: ignore
+
 
 ######################## main() ##############################################################################
 

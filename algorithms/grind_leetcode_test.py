@@ -1,5 +1,7 @@
 import unittest
 from grind_leetcode import *
+import build_binary_tree as bbt
+from typing import Optional, List
 
 
 class TestGrindLeetCode(unittest.TestCase):
@@ -38,6 +40,12 @@ class TestGrindLeetCode(unittest.TestCase):
         # correctness of my implementation 😉
         # Tip: If you invert a binary tree twice, you should get the original back if your algorithm
         # is bug free.
+        nums: List[int] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+        root: Optional[TreeNode] = bbt.to_binary_tree(nums)
+        root_inverted = invert_tree(root)
+        root_inverted_inverted = invert_tree(root_inverted)
+        nums_inverted_inverted = bbt.traverse_tree(root_inverted_inverted)
+        self.assertEqual(nums, nums_inverted_inverted, "Failed to create and invert then invert again a binary tree")
 
     def test_is_anagram(self):
         self.assertEqual(is_anagram("anagram", "nagaram"), True, "Failed is_anagram")
@@ -65,6 +73,21 @@ class TestGrindLeetCode(unittest.TestCase):
         sc = 0
         color = 2
         self.assertEqual(flood_fill(image, sr, sc, color), [[2, 2, 2], [2, 2, 2]], "Failed flood_fill")
+
+    def test_lowestCommonAncestor(self):
+        nums = [6, 2, 8, 0, 4, 7, 9, 3, 5]
+        root: TreeNode = bbt.to_binary_tree(nums)  # type: ignore
+        self.assertEqual(lowestCommonAncestor(root, TreeNode(2), TreeNode(8)), TreeNode(6), "Failed lowestCommonAncestor")
+
+        nums = [6, 2, 8, 0, 4, 7, 9, 3, 5]
+        root: TreeNode = bbt.to_binary_tree(nums)  # type: ignore
+        self.assertEqual(lowestCommonAncestor(root, TreeNode(2), TreeNode(4)), TreeNode(2), "Failed lowestCommonAncestor")
+
+        nums = [2, 1]
+        root: TreeNode = bbt.to_binary_tree(nums)  # type: ignore
+        self.assertEqual(lowestCommonAncestor(root, TreeNode(2), TreeNode(1)), TreeNode(2), "Failed lowestCommonAncestor")
+
+        print('All success!')
 
 
 if __name__ == "__main__":
