@@ -41,6 +41,9 @@ class TestDailyByte(unittest.TestCase):
         self.assertEqual(is_valid_palindrome_with_removal('ofobof'), True, 'Failed is_valid_palindrome_with_removal "ofobof"')
         self.assertEqual(is_valid_palindrome_with_removal('abccab'), False, 'Failed is_valid_palindrome_with_removal "abccab"')
         self.assertEqual(is_valid_palindrome_with_removal('fobofo'), True, 'Failed is_valid_palindrome_with_removal "fobofo"')
+        self.assertEqual(is_valid_palindrome_with_removal('bddb'), True, 'Failed is_valid_palindrome_with_removal "bddb"')
+        self.assertEqual(is_valid_palindrome_with_removal('"dbbeabdaccccadbaebbd"'), True,
+                         'Failed is_valid_palindrome_with_removal ""dbbeabdaccccadbaebbd""')
 
 
 if __name__ == "__main__":

@@ -189,7 +189,9 @@ def is_valid_palindrome_with_removal(s: str) -> bool:
                 break
 
     if mismatch == 0 and n % 2 == 0:
-        palindrome_with_removal = False
+        mid = n // 2
+        if not is_palindrome(s[0:mid] + s[mid + 1:]):
+            palindrome_with_removal = False
 
     return palindrome_with_removal
 
