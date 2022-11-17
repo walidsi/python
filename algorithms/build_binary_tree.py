@@ -24,19 +24,26 @@ class TreeNode:
 
 def to_binary_tree(items: list[int]) -> TreeNode:
     """Create BT from list of values. Assumes non empty list and that first element in list is not null"""
-    n = len(items)
 
-    def inner(index: int = 0) -> Optional[TreeNode]:
-        """Closure function using recursion bo build tree"""
-        if n <= index or items[index] is None:
-            return None
+    n = iter(items)
+    tree = TreeNode(next(n))
+    fringe = deque([tree])
+    while True:
+        head = fringe.popleft()
+        try:
+            val = next(n)
+            if val is not None:
+                head.left = TreeNode(val)
+                fringe.append(head.left)
 
-        node = TreeNode(items[index])
-        node.left = inner(2 * index + 1)
-        node.right = inner(2 * index + 2)
-        return node
+            val = next(n)
+            if val is not None:
+                head.right = TreeNode(val)
+                fringe.append(head.right)
+        except StopIteration:
+            break
 
-    return inner()  # type:ignore
+    return tree
 
 
 def traverse_tree(root: Optional[TreeNode]) -> list:
