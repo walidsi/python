@@ -160,6 +160,35 @@ def find_longest_common_prefix(arr: List[str]) -> str:
 
     return prefix
 
+
+def is_valid_palindrome_with_removal(s: str) -> bool:
+    """Given a string and the ability to delete at most one character, 
+    return whether or not it can form a palindrome.
+    """
+
+    is_palindrome = True
+
+    n = len(s)
+
+    left = 0
+    right = len(s) - 1
+
+    mismatch = 0
+
+    while left <= right:
+        if s[left] == s[right]:
+            left += 1
+            right -= 1
+        elif mismatch == 0:
+            mismatch += 1
+            left += 1
+        else:
+            is_palindrome = False
+            break
+
+    return is_palindrome
+
+
 ########################### main() ####################################################
 
 

@@ -35,6 +35,12 @@ class TestDailyByte(unittest.TestCase):
         self.assertEqual(find_longest_common_prefix(["a", "b", "c"]), "", "Failed!")
         self.assertEqual(find_longest_common_prefix(["spot", "spotty", "spotted"]), "spot", "Failed!")
 
+    def test_is_valid_palindrome_with_removal(self):
+        self.assertEqual(is_valid_palindrome_with_removal('abcba'), True, 'Failed is_valid_palindrome_with_removal "abcba"')
+        self.assertEqual(is_valid_palindrome_with_removal('foobof'), True, 'Failed is_valid_palindrome_with_removal "foobof1"')
+        self.assertEqual(is_valid_palindrome_with_removal('ofobof'), True, 'Failed is_valid_palindrome_with_removal "ofobof"')
+        self.assertEqual(is_valid_palindrome_with_removal('abccab'), False, 'Failed is_valid_palindrome_with_removal "abccab"')
+
 
 if __name__ == "__main__":
     unittest.main()
