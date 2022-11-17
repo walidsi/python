@@ -47,7 +47,8 @@ def to_binary_tree(items: list[int]) -> TreeNode:
 
 
 def traverse_tree(root: Optional[TreeNode]) -> list:
-    """Traverse a binary tree of integers and return the values in it as a list"""
+    """Traverse a binary tree of integers using breadth-first travesal method 
+    and return the values of the nodes in the tree as a list"""
 
     nums = list()
 
@@ -85,13 +86,55 @@ def traverse_tree(root: Optional[TreeNode]) -> list:
     return nums
 
 
+def preorder_traveral(node: Optional[TreeNode]) -> None:
+    """One kind of depth-first traversal"""
+    if node is None:
+        return
+
+    print(node.val, end=',')
+
+    preorder_traveral(node.left)
+    preorder_traveral(node.right)
+
+
+def bft_traverse_tree(root: Optional[TreeNode]) -> list:
+    """Traverse a binary tree of integers using breadth-first travesal method 
+    and return the values of the nodes in the tree as a list"""
+
+    nums = list()
+
+    if root is None:
+        return nums
+
+    q = deque()
+    q.append(root)
+
+    while len(q):
+        node = q.popleft()
+        if node is not None:
+            nums.append(node.val)
+            q.append(node.left)
+            q.append(node.right)
+        else:
+            nums.append(None)
+
+    # Remove trailing hashes
+    for i in range(len(nums) - 1, -1, -1):
+        if nums[i] is None:
+            nums.pop()
+        else:
+            break
+
+    return nums
+
+
 if __name__ == "__main__":
     nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
     root = to_binary_tree(nums)
     nums2 = traverse_tree(root)
     drawtree.draw_level_order('[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]')
 
-    print('\n')
+    print('\n\n\n')
 
     nums = [1, 2, 3, 4, 5, 6, 7, None, None, 10]
     root = to_binary_tree(nums)
@@ -99,3 +142,22 @@ if __name__ == "__main__":
     nums2_str = nums2.__repr__()
     nums2_str = nums2_str.replace("'", "").replace(" ", "")
     drawtree.draw_level_order(nums2_str)
+
+    print('\n\n\n')
+
+    nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    drawtree.draw_level_order('[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]')
+    root = to_binary_tree(nums)
+    preorder_traveral(root)
+
+    nums = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+    root = to_binary_tree(nums)
+    bft_traverse_tree(root)
+
+    nums = [1, 2, 3, 4, 5, 6, 7, None, None, 10]
+    root = to_binary_tree(nums)
+    bft_traverse_tree(root)
+
+    nums = ['A', 'B', 'C', 'D', 'E', 'F', 'G', None, None, 'H', None, None, None, 'I', 'J']
+    root = to_binary_tree(nums)
+    bft_traverse_tree(root)
