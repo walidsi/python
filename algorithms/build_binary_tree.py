@@ -53,17 +53,15 @@ def traverse_tree(root: Optional[TreeNode]) -> list:
     nums.append(node.val)
 
     while (node is not None):
-        if node.left:
-            nums.append(node.left.val)
-            q.append(node.left)
-        elif len(q):
-            nums.append('#')
+        def traverse_child(node: Optional[TreeNode]):
+            if node:
+                nums.append(node.val)
+                q.append(node)
+            elif len(q):
+                nums.append('#')
 
-        if node.right:
-            q.append(node.right)
-            nums.append(node.right.val)
-        elif len(q):
-            nums.append('#')
+        traverse_child(node.left)
+        traverse_child(node.right)
 
         if len(q):
             node = q.popleft()
