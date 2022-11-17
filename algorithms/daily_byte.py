@@ -166,7 +166,7 @@ def is_valid_palindrome_with_removal(s: str) -> bool:
     return whether or not it can form a palindrome.
     """
 
-    is_palindrome = True
+    palindrome_with_removal = True
 
     n = len(s)
 
@@ -181,12 +181,17 @@ def is_valid_palindrome_with_removal(s: str) -> bool:
             right -= 1
         elif mismatch == 0:
             mismatch += 1
-            left += 1
-        else:
-            is_palindrome = False
-            break
+            if is_palindrome(s[left + 1:right + 1]) or is_palindrome(s[left:right]):
+                palindrome_with_removal = True
+                break
+            else:
+                palindrome_with_removal = False
+                break
 
-    return is_palindrome
+    if mismatch == 0 and n % 2 == 0:
+        palindrome_with_removal = False
+
+    return palindrome_with_removal
 
 
 ########################### main() ####################################################
