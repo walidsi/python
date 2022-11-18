@@ -44,6 +44,15 @@ class TestDailyByte(unittest.TestCase):
         self.assertEqual(is_valid_palindrome_with_removal('bddb'), True)
         self.assertEqual(is_valid_palindrome_with_removal('"dbbeabdaccccadbaebbd"'), True)
 
+    def test_is_palindrome_recursive(self):
+        self.assertEqual(is_palindrome_recursive('abcba'), True)
+        self.assertEqual(is_palindrome_recursive('foobof'), False)
+        self.assertEqual(is_palindrome_recursive('ofobof'), False)
+        self.assertEqual(is_palindrome_recursive('abccab'), False)
+        self.assertEqual(is_palindrome_recursive('fobofo'), False)
+        self.assertEqual(is_palindrome_recursive('bddb'), True)
+        self.assertEqual(is_palindrome_recursive('dbbeabdaccccadbaebbd'), True)
+
 
 if __name__ == "__main__":
     unittest.main()

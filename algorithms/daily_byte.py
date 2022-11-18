@@ -196,6 +196,22 @@ def is_valid_palindrome_with_removal(s: str) -> bool:
     return palindrome_with_removal
 
 
+def is_palindrome_recursive(s: str) -> bool:
+    """Returns True if s is palindrome, False otherwise. Assumes s contains alphanumeric characters only."""
+
+    n = len(s)
+    if n == 0 or n == 1:  # When you hit this terminal condition, it implicilty means all outer ones are True,
+        return True       # that is why you reached here!!
+
+    left = 0
+    right = len(s) - 1
+
+    if s[left] != s[right]:
+        return False
+
+    palindrome = is_palindrome_recursive(s[left + 1:right])
+
+    return palindrome
 ########################### main() ####################################################
 
 
