@@ -60,4 +60,9 @@ class TestDailyByte(unittest.TestCase):
 
 
 if __name__ == "__main__":
+    # How to write test resutls to file
+    # suite = unittest.defaultTestLoader.loadTestsFromTestCase(TestDailyByte)
+    # fp = open('my_report.txt', 'w')
+    # unittest.TextTestRunner(fp).run(suite)
+    # fp.close()
     unittest.main()
