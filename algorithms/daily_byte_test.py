@@ -1,5 +1,6 @@
 import unittest
 from daily_byte import *
+from typing import List, Tuple
 
 
 class TestDailyByte(unittest.TestCase):
@@ -45,13 +46,17 @@ class TestDailyByte(unittest.TestCase):
         self.assertEqual(is_valid_palindrome_with_removal('"dbbeabdaccccadbaebbd"'), True)
 
     def test_is_palindrome_recursive(self):
-        self.assertEqual(is_palindrome_recursive('abcba'), True)
-        self.assertEqual(is_palindrome_recursive('foobof'), False)
-        self.assertEqual(is_palindrome_recursive('ofobof'), False)
-        self.assertEqual(is_palindrome_recursive('abccab'), False)
-        self.assertEqual(is_palindrome_recursive('fobofo'), False)
-        self.assertEqual(is_palindrome_recursive('bddb'), True)
-        self.assertEqual(is_palindrome_recursive('dbbeabdaccccadbaebbd'), True)
+        test_strings: List[Tuple[str, bool]] = [('abcba', True),
+                                                ('foobof', False),
+                                                ('ofobof', False),
+                                                ('abccab', False),
+                                                ('fobofo', False),
+                                                ('bddb', True),
+                                                ('dbbeabdaccccadbaebbd', True)]
+
+        for tup in test_strings:
+            with self.subTest(tup[0], expected_result=tup[1]):
+                self.assertEqual(is_palindrome_recursive(tup[0]), tup[1])
 
 
 if __name__ == "__main__":
