@@ -304,6 +304,21 @@ def lowestCommonAncestor(root: TreeNode, p: TreeNode, q: TreeNode) -> TreeNode:
         return root
 
 
+def is_height_balanced(node: Optional[TreeNode]) -> Tuple[int, bool]:
+    if node is None:
+        return (0, True)
+
+    lh, lbalanced = is_height_balanced(node.left)
+    rh, rbalanced = is_height_balanced(node.right)
+
+    height = max(lh, rh) + 1
+
+    balanced = False
+    if abs(lh - rh) <= 1 and lbalanced and rbalanced:
+        balanced = True
+
+    return (height, balanced)
+
 ######################## main() ##############################################################################
 
 
