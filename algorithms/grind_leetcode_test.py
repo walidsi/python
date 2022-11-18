@@ -4,11 +4,6 @@ import build_binary_tree as bbt
 from typing import Optional, List
 
 
-def list_to_str(nums: list) -> str:
-    s = nums.__repr__().replace(', ', ','). replace('None', '#')
-    return s
-
-
 class TestGrindLeetCode(unittest.TestCase):
     def setUp(self) -> None:
         return super().setUp()
@@ -94,10 +89,7 @@ class TestGrindLeetCode(unittest.TestCase):
 
     def test_is_height_balanced(self):
         nums = [1, 2, 2, 3, None, None, 3, 4, None, None, 4]
-        s_tree = list_to_str(nums)
-        print('\n')
-        bbt.drawtree.draw_level_order(s_tree)
-        print('\n')
+        bbt.draw_tree(nums)
 
         root: Optional[TreeNode] = bbt.to_binary_tree(nums)
         self.assertEqual(is_height_balanced(root), (4, False))
