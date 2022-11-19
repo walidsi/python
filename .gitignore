@@ -8,5 +8,7 @@ exe/build
 exe/*.spec
 pip-date.py
 daily_byte_tests.html
+daily_byte_tests.txt
+reports
 
 
