@@ -1,3 +1,10 @@
+import sys
+sys.path.append('/github-repos/HTMLTestRunner/')
+import HTMLTestRunner  # type: ignore
+
+sys.path.append('/github-repos/HTMLTestRunner-oldani/')
+import HtmlTestRunner.runner  # type: ignore
+
 import unittest
 from daily_byte import *
 from typing import List, Tuple
@@ -60,9 +67,21 @@ class TestDailyByte(unittest.TestCase):
 
 
 if __name__ == "__main__":
-    # How to write test resutls to file
-    # suite = unittest.defaultTestLoader.loadTestsFromTestCase(TestDailyByte)
-    # fp = open('my_report.txt', 'w')
-    # unittest.TextTestRunner(fp).run(suite)
-    # fp.close()
-    unittest.main()
+    to_file: bool = True
+    to_txt: bool = False
+    is_twan: bool = True
+
+    if to_file:
+        suite = unittest.TestSuite([unittest.defaultTestLoader.loadTestsFromTestCase(TestDailyByte)])
+        if to_txt:
+            fp = open('daily_byte_tests.txt', 'w')
+            unittest.TextTestRunner(fp).run(suite)
+            fp.close()
+        elif is_twan:
+            fp = open('daily_byte_tests.html', 'w')
+            HTMLTestRunner.HTMLTestRunner(fp).run(suite)
+            fp.close()
+        else:
+            HtmlTestRunner.runner.HTMLTestRunner().run(suite)
+    else:
+        unittest.main()
