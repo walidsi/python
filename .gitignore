@@ -11,4 +11,11 @@ daily_byte_tests.html
 daily_byte_tests.txt
 reports
 
+bookmarks-converter/*.csv
+bookmarks-converter/*.html
+bookmarks-converter/*.json
+bookmarks-converter/outputs
+
+
+
 
