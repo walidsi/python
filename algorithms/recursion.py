@@ -1,5 +1,6 @@
 from typing import List
 from collections import deque
+import drawtree
 
 
 def sum_array(arr: List[int]) -> int:
@@ -160,6 +161,8 @@ def main():
         root.add_node(val)
 
     print(root)
+
+    drawtree.draw_level_order(root.__repr__().replace(', ', ',').replace('None', '#'))
 
 
 if __name__ == "__main__":
