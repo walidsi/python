@@ -82,6 +82,21 @@ class TreeNode:
         self.left = None
         self.right = None
 
+    @staticmethod
+    def _add_node(node, val):
+        if node == None:
+            return TreeNode(val)
+
+        if val < node.value:
+            node.left = node._add_node(node.left, val)
+        else:
+            node.right = node._add_node(node.right, val)
+
+        return node
+
+    def add_node(self, val):
+        self._add_node(self, val)
+
     def __repr__(self) -> str:
         q = deque()
         q.append(self)
@@ -98,19 +113,16 @@ class TreeNode:
             else:
                 arr.append(None)
 
+        # Remove trailing None
+        i = len(arr) - 1
+        while i >= 0:
+            if arr[i] == None:
+                arr.pop()
+            else:
+                break
+            i -= 1
+
         return str(arr)
-
-
-def add_node(root: TreeNode, val) -> TreeNode:
-    if root == None:
-        return TreeNode(val)
-
-    if val < root.value:
-        root.left = add_node(root.left, val)
-    else:
-        root.right = add_node(root.right, val)
-
-    return root
 
 
 def main():
@@ -123,7 +135,7 @@ def main():
     if sum_abs_diff([15, -4, 56, 10, -23], [14, -9, 56, 14, -23]) == 10:
         print('sum_abs_diff is success!')
 
-    s = "hello"
+    s = 'hello'
     print(f'Input string is: {s}, reversed string is: {reverse_string(s)}')
 
     print_array([1, 2, 3, 4, 5, 6])
@@ -146,7 +158,7 @@ def main():
     tree = [5, 6, 3, 4, 1, 7, 9, 10]
     root = TreeNode(tree[0])
     for val in tree[1:]:
-        root = add_node(root, val)
+        root.add_node(val)
 
     print(root)
 
