@@ -82,20 +82,19 @@ class TreeNode:
         self.left = None
         self.right = None
 
-    @staticmethod
-    def _add_node(node, val):
-        if node == None:
-            return TreeNode(val)
-
-        if val < node.value:
-            node.left = node._add_node(node.left, val)
-        else:
-            node.right = node._add_node(node.right, val)
-
-        return node
-
     def add_node(self, val):
-        self._add_node(self, val)
+        def _add_node(node, val):
+            if node == None:
+                return TreeNode(val)
+
+            if val < node.value:
+                node.left = _add_node(node.left, val)
+            else:
+                node.right = _add_node(node.right, val)
+
+            return node
+
+        return _add_node(self, val)
 
     def __repr__(self) -> str:
         q = deque()
