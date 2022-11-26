@@ -1,4 +1,5 @@
 from typing import List
+from collections import deque
 
 
 def sum_array(arr: List[int]) -> int:
@@ -75,6 +76,43 @@ def my_map(arr: list, func) -> list:
     return my_map(arr[:1], func) + my_map(arr[1:], func)
 
 
+class TreeNode:
+    def __init__(self, val) -> None:
+        self.value = val
+        self.left = None
+        self.right = None
+
+    def __repr__(self) -> str:
+        q = deque()
+        q.append(self)
+
+        arr = list()
+
+        while len(q) > 0:
+            node = q.popleft()
+
+            if node is not None:
+                arr.append(node.value)
+                q.append(node.left)
+                q.append(node.right)
+            else:
+                arr.append(None)
+
+        return str(arr)
+
+
+def add_node(root: TreeNode, val) -> TreeNode:
+    if root == None:
+        return TreeNode(val)
+
+    if val < root.value:
+        root.left = add_node(root.left, val)
+    else:
+        root.right = add_node(root.right, val)
+
+    return root
+
+
 def main():
     arr = [1, 2, 3, 4, 5]
     print(sum_array(arr))
@@ -104,6 +142,13 @@ def main():
     print(f'a={a}, b={b}, a to the power b = {a_to_power_b(a, b)}')
 
     print(my_map([1, 2, 3, 4, 5], double))
+
+    tree = [5, 6, 3, 4, 1, 7, 9, 10]
+    root = TreeNode(tree[0])
+    for val in tree[1:]:
+        root = add_node(root, val)
+
+    print(root)
 
 
 if __name__ == "__main__":
