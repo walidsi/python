@@ -1,4 +1,4 @@
-from typing import Optional, Tuple
+from typing import Optional, Tuple, List
 
 
 # Definition for singly-linked list.
@@ -8,9 +8,9 @@ class ListNode:
         self.next = next
 
 
-def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
+def reverseList(head: Optional[ListNode]) -> Optional[ListNode]:
     """Reverses a linked list, returing the head of the reversed linked list"""
-    def _reverseList(head) -> Tuple(Optional[ListNode], Optional[ListNode]):
+    def _reverseList(head) -> Tuple[Optional[ListNode], Optional[ListNode]]:
         """Closure function to reverse a linked list recursively returning 
         new head and tail of sub-linked list at each stage"""
         if head is None:
@@ -35,3 +35,32 @@ def reverseList(self, head: Optional[ListNode]) -> Optional[ListNode]:
 
     new_head, _ = _reverseList(head)
     return new_head
+
+
+def linked_list_to_list(head: ListNode) -> List[int]:
+    node = head
+    ll = []
+    while node is not None:
+        ll.append(node.val)
+        node = node.next
+    return ll
+
+
+def main():
+    nums = [1, 2, 3, 4, 5]
+    head = ListNode(nums[0])
+    curr = head
+    for n in nums[1:]:
+        node = ListNode(n)
+        curr.next = node
+        curr = node
+
+    print(linked_list_to_list(head))
+
+    new_head = reverseList(head)
+
+    print(linked_list_to_list(new_head))
+
+
+if __name__ == "__main__":
+    main()
