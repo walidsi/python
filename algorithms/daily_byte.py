@@ -201,7 +201,7 @@ def is_palindrome_recursive(s: str) -> bool:
 
     n = len(s)
     if n == 0 or n == 1:  # When you hit this terminal condition, it implicilty means all outer ones are True,
-        return True       # that is why you reached here!!
+        return True  # that is why you reached here!!
 
     left = 0
     right = len(s) - 1
@@ -212,6 +212,45 @@ def is_palindrome_recursive(s: str) -> bool:
     palindrome = is_palindrome_recursive(s[left + 1:right])
 
     return palindrome
+
+
+def two_sum(nums: list, k: int):
+    """Given an array of integers, return whether or not two numbers sum to a given target, k.
+    Note: you may not sum a number with itself.
+    Example: [1, 3, 8, 2], k = 10, return true (8 + 2)
+    """
+
+    lookup = dict()
+
+    for n in nums:
+        if n in lookup:
+            return True
+        else:
+            diff = k - n
+            lookup[diff] = n
+
+    return False
+
+
+def jewels_and_stones(jewels: str, stones: str) -> int:
+    """Given a string representing your stones and another string representing a list of jewels,
+    return the number of stones that you have that are also jewels.
+    Example: jewels = "abc", stones = "ac", return 2
+    """
+
+    jewels_lookup = {}
+
+    for j in jewels:
+        jewels_lookup[j] = 1
+
+    stones_in_jewels = 0
+    for s in stones:
+        if s in jewels_lookup:
+            stones_in_jewels += 1
+
+    return stones_in_jewels
+
+
 ########################### main() ####################################################
 
 

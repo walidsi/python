@@ -1,4 +1,5 @@
 import sys
+
 sys.path.append('/github-repos/HTMLTestRunner/')
 import HTMLTestRunner  # type: ignore
 
@@ -53,26 +54,49 @@ class TestDailyByte(unittest.TestCase):
         self.assertEqual(is_valid_palindrome_with_removal('"dbbeabdaccccadbaebbd"'), True)
 
     def test_is_palindrome_recursive(self):
-        test_strings: List[Tuple[str, bool]] = [('abcba', True),
-                                                ('foobof', False),
-                                                ('ofobof', False),
-                                                ('abccab', False),
-                                                ('fobofo', False),
-                                                ('bddb', True),
-                                                ('dbbeabdaccccadbaebbd', True)]
+        test_strings: List[Tuple[str, bool]] = [
+            ('abcba', True), ('foobof', False), ('ofobof', False), ('abccab', False),
+            ('fobofo', False), ('bddb', True), ('dbbeabdaccccadbaebbd', True)
+        ]
 
         for tup in test_strings:
             with self.subTest(tup[0], expected_result=tup[1]):
                 self.assertEqual(is_palindrome_recursive(tup[0]), tup[1])
 
 
+class TestDailyByteIntegers(unittest.TestCase):
+    def test_two_sum(self):
+        tests: List[Tuple[List[int], int, bool]] = [
+            ([1, 3, 8, 2], 10, True),
+            ([3, 9, 13, 7], 8, False),
+            ([4, 2, 6, 5, 2], 4, True),
+        ]
+
+        for test in tests:
+            with self.subTest(nums=test[0], target=test[1], expected_result=test[2]):
+                self.assertEqual(two_sum(test[0], test[1]), test[2])
+
+    def test_jewels_and_stones(self):
+        tests: List[Tuple[str, str, int]] = [
+            ('abc', 'ac', 2),
+            ('Af', 'AaaddfFf', 3),
+            ('AYOPD', 'ayopd', 0),
+        ]
+
+        for test in tests:
+            with self.subTest(jewels=test[0], stones=test[1], expected_result=test[2]):
+                self.assertEqual(jewels_and_stones(test[0], test[1]), test[2])
+
+
 if __name__ == "__main__":
-    to_file: bool = True
+    to_file: bool = False
     to_txt: bool = False
     is_twan: bool = True
 
     if to_file:
-        suite = unittest.TestSuite([unittest.defaultTestLoader.loadTestsFromTestCase(TestDailyByte)])
+        suite = unittest.TestSuite(
+            [unittest.defaultTestLoader.loadTestsFromTestCase(TestDailyByte)]
+        )
         if to_txt:
             fp = open('daily_byte_tests.txt', 'w')
             unittest.TextTestRunner(fp).run(suite)
