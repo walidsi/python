@@ -87,6 +87,66 @@ class TestDailyByteIntegers(unittest.TestCase):
             with self.subTest(jewels=test[0], stones=test[1], expected_result=test[2]):
                 self.assertEqual(jewels_and_stones(test[0], test[1]), test[2])
 
+    def test_is_anagram(self):
+        tests: List[Tuple[str, str, bool]] = [
+            ('cat', 'tac', True),
+            ('listen', 'silent', True),
+            ('program', 'function', False),
+        ]
+
+        for test in tests:
+            with self.subTest(s=test[0], t=test[1], expected_result=test[2]):
+                self.assertEqual(is_anagram(test[0], test[1]), test[2])
+
+    def test_get_first_unqiue(self):
+        tests: List[Tuple[str, int]] = [
+            ('abcabd', 2),
+            ('thedailybyte', 1),
+            ('developer', 0),
+        ]
+
+        for test in tests:
+            with self.subTest(s=test[0], expected_result=test[1]):
+                self.assertEqual(get_first_unique(test[0]), test[1])
+
+    def test_spot_difference(self):
+        tests: List[Tuple[str, str, str]] = [
+            ('foobar', 'barfoot', 't'),
+            ('ide', 'idea', 'a'),
+            ('coding', 'ingcod', ''),
+        ]
+
+        for test in tests:
+            with self.subTest(s=test[0], t=test[1], expected_result=test[2]):
+                self.assertEqual(spot_difference(test[0], test[1]), test[2])
+
+    def test_get_intersection(self):
+        tests: List[Tuple[List[int], List[int], List[int]]] = [
+            ([2, 4, 4, 2], [2, 4], [2, 4]),
+            ([1, 2, 3, 3], [3, 3], [3]),
+            ([2, 4, 6, 8], [1, 3, 5, 7], []),
+        ]
+
+        for test in tests:
+            with self.subTest(s=test[0], t=test[1], expected_result=test[2]):
+                self.assertEqual(get_intersection(test[0], test[1]), test[2])
+
+    def test_get_uncommon_words(self):
+        tests: List[Tuple[str, str, List[str]]] = [
+            ('the quick', 'brown fox', ["the", "quick", "brown", "fox"]),
+            (
+                'the tortoise beat the haire', 'the tortoise lost to the haire', [
+                    "beat", "to", "lost"
+                ]
+            ),
+            ('copper coffee pot', 'hot coffee pot', ["copper", "hot"]),
+        ]
+
+        for test in tests:
+            with self.subTest(s=test[0], t=test[1], expected_result=test[2]):
+                # Lists converted to sets to avoid ordering in equality test
+                self.assertSetEqual(set(get_uncommon_words(test[0], test[1])), set(test[2]))
+
 
 if __name__ == "__main__":
     to_file: bool = False
