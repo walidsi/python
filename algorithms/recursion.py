@@ -93,6 +93,8 @@ class TreeNode:
             else:
                 node.right = _add_node(node.right, val)
 
+            # You need to return the input node here because otherwise in the non base case it will be implicitly None,
+            # which will nullify your node.left or node.right thus losing links to lower level nodes in the tree.
             return node
 
         return _add_node(self, val)
