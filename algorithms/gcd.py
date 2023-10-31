@@ -47,3 +47,29 @@ def gcd_iterative(m, n):
 
 print(gcd2(60, 24))
 print(gcd_iterative(3918848, 1653264))
+
+
+def get_primes(n: int) -> list:
+    # Returns list of primes numbers between 1 and n inclusive
+
+    nums = [i for i in range(2, n + 1)]
+
+    size = len(nums)
+    index1 = 0
+
+    while index1 < size:
+        num1 = nums[index1]
+        index2 = index1 + 1
+        while index2 < size:
+            num2 = nums[index2]
+            if num2 % num1 == 0:
+                nums.remove(num2)
+                size = size - 1
+                continue
+            index2 += 1
+        index1 += +1
+
+    return nums
+
+
+print(get_primes(25))
