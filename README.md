@@ -12,7 +12,7 @@ python.
 
 https://websiteforstudents.com/how-to-install-python-on-ubuntu-linux/
 
-3- Finally, create the pyhton environment using the followin command:
+3- Finally, create the pyhton environment using the following command:
 ```
 python3 -m virtualenv -p=</usr/local/bin/pythonX.X> <env_folder_name>
 ```
