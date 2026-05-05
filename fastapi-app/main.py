@@ -1,59 +1,83 @@
-import stat
-from turtle import title
-from fastapi import FastAPI, Response, status
-from pydantic import BaseModel
-from typing import Union, Optional
+from contextlib import asynccontextmanager
+from typing import Optional
+
 import uvicorn
+from fastapi import Depends, FastAPI, HTTPException, status
+from sqlmodel import Session, select
+
 import models
 
-class Blog(BaseModel):
-     title: str
-     body: str
-     published: Optional[bool]
 
-app = FastAPI()
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    models.init_db()
+    yield
 
-@app.get('/')
-def root():
-    blogs = models.session.query(models.Blog).all()
-    return {'data': blogs}
 
-@app.get('/blog')
-def index(limit: int = 10, published: bool = True, sort: Optional[str] = None):
-    if published:
-        return {'data': f'{limit} published blogs from db'}
-    else:
-        return {'data': f'{limit} blogs from db'}
-    
-@app.get('/blog/unpublished')
-def unpublished():
-    return {'data': 'all unpublished blogs'}
+app = FastAPI(lifespan=lifespan)
 
-@app.get('/blog/{id}')
-def show(id: int):
-    blog = models.session.get(models.Blog, id)
-    return {'data': blog}
 
-@app.get('/blog/{id}/comments')
+def get_session():
+    with Session(models.engine) as session:
+        yield session
+
+
+@app.get("/")
+def root(session: Session = Depends(get_session)):
+    blogs = session.exec(select(models.Blog)).all()
+    return {"data": [models.BlogRead.model_validate(blog) for blog in blogs]}
+
+
+@app.get("/blog")
+def index(
+    limit: int = 10,
+    published: Optional[bool] = None,
+    sort: Optional[str] = None,
+    session: Session = Depends(get_session),
+):
+    statement = select(models.Blog).limit(limit)
+    if published is not None:
+        statement = statement.where(models.Blog.published.is_(published))
+    blogs = session.exec(statement).all()
+    return {"data": [models.BlogRead.model_validate(blog) for blog in blogs]}
+
+
+@app.get("/blog/unpublished")
+def unpublished(session: Session = Depends(get_session)):
+    blogs = session.exec(select(models.Blog).where(models.Blog.published.is_(False))).all()
+    return {"data": [models.BlogRead.model_validate(blog) for blog in blogs]}
+
+
+@app.get("/blog/{id}")
+def show(id: int, session: Session = Depends(get_session)):
+    blog = session.exec(select(models.Blog).where(models.Blog.id == id)).first()
+    if not blog:
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Blog not found")
+    return {"data": models.BlogRead.model_validate(blog)}
+
+
+@app.get("/blog/{id}/comments")
 def comments(id: int, limit: int = 10):
-    return {'data': f'blog {id}',
-            'comments': [i for i in range(limit)]}
-    
-@app.post('/blog', status_code=status.HTTP_200_OK)
-def create_blog(blog: Blog):
-    new_blog = models.Blog(title=blog.title, body=blog.body, published=blog.published)
-    models.session.add(new_blog)
-    models.session.commit()
-    return {'data': f'Blog is created with {blog}'}
-    
-@app.get('/about')
+    return {"data": f"blog {id}", "comments": [i for i in range(limit)]}
+
+
+@app.post("/blog", status_code=status.HTTP_201_CREATED)
+def create_blog(blog: models.BlogCreate, session: Session = Depends(get_session)):
+    db_blog = models.Blog.model_validate(blog)
+    session.add(db_blog)
+    session.commit()
+    session.refresh(db_blog)
+    return {"data": models.BlogRead.model_validate(db_blog)}
+
+
+@app.get("/about")
 def about():
-    return {'Author': 'Walid Ismail'}
+    return {"Author": "Walid Ismail"}
 
 
-if __name__ == '__main__':
-    uvicorn.run(app, host='127.0.0.1', port=9000)
-    
+if __name__ == "__main__":
+    uvicorn.run(app, host="127.0.0.1", port=9000)
+
 
 # to copy updates of this file to a running container, use the following command:
 # docker cp main.py b9dc417c8b30:/app/main.py
