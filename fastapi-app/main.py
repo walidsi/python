@@ -37,14 +37,14 @@ def index(
 ):
     statement = select(models.Blog).limit(limit)
     if published is not None:
-        statement = statement.where(models.Blog.published.is_(published))
+        statement = statement.where(models.Blog.published == published)
     blogs = session.exec(statement).all()
     return {"data": [models.BlogRead.model_validate(blog) for blog in blogs]}
 
 
 @app.get("/blog/unpublished")
 def unpublished(session: Session = Depends(get_session)):
-    blogs = session.exec(select(models.Blog).where(models.Blog.published.is_(False))).all()
+    blogs = session.exec(select(models.Blog).where(models.Blog.published == False)).all()
     return {"data": [models.BlogRead.model_validate(blog) for blog in blogs]}
 
 
