@@ -75,6 +75,21 @@ def about():
     return {"Author": "Walid Ismail"}
 
 
+@app.get("/health")
+def health():
+    return {"status": "OK"}
+
+
+@app.get("/health2")
+def health2():
+    return {"status": "service down"}
+
+
+@app.get("/health3")
+def health3():
+    return "Hello World"
+
+
 if __name__ == "__main__":
     uvicorn.run(app, host="127.0.0.1", port=9000)
 
