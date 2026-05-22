@@ -24,7 +24,7 @@ def get_session():
 
 @app.get("/health")
 def health():
-    return {"status": "ok"}
+    return {"status": "server is up and running"}
 
 
 @app.get("/")
