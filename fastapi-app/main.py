@@ -42,6 +42,11 @@ def health5():
     return "Hello world"
 
 
+@app.get("/health6")
+def health6():
+    return "I am the sixth route"
+
+
 @app.get("/")
 def root(session: Session = Depends(get_session)):
     blogs = session.exec(select(models.Blog)).all()
