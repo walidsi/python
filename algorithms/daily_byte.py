@@ -4,7 +4,7 @@ from typing import List
 
 def gb_reverse_string(input: str) -> str:
     # A string is an immutable object is python, so how best can I do this task??
-    reverse: str = ''
+    reverse: str = ""
     for i in range(-1, -len(input) - 1, -1):
         reverse = reverse + input[i]
 
@@ -12,7 +12,7 @@ def gb_reverse_string(input: str) -> str:
 
 
 def gb_reverse_string_2(input: str) -> str:
-    reverse: str = ''
+    reverse: str = ""
 
     for c in input:
         # Key here is to add reverse to c, not the opposite. This will reverse the string. Nice trick!
@@ -49,13 +49,13 @@ def is_closed_loop(s: str):
     y: int = 0
 
     for c in s:
-        if c == 'R':
+        if c == "R":
             x += 1
-        elif c == 'L':
+        elif c == "L":
             x -= 1
-        elif c == 'U':
+        elif c == "U":
             y += 1
-        elif c == 'D':
+        elif c == "D":
             y -= 1
     closed_loop: bool = False
     if x == 0 and y == 0:
@@ -66,16 +66,16 @@ def is_closed_loop(s: str):
 
 def is_capitalized_correctly(s: str) -> bool:
     capitalized_correctly: bool = False
-    first_char_is_captial = False
+    first_char_is_capital = False
     has_middle_capital = False
     has_middle_small = False
     all_caps = True
     no_caps = True
 
     if s[0] == s[0].upper():
-        first_char_is_captial = True
+        first_char_is_capital = True
     else:
-        first_char_is_captial = False
+        first_char_is_capital = False
         all_caps = False
 
     for i in range(1, len(s)):
@@ -90,7 +90,7 @@ def is_capitalized_correctly(s: str) -> bool:
         capitalized_correctly = True
     elif no_caps == True:
         capitalized_correctly = True
-    elif first_char_is_captial == True and has_middle_capital == False:
+    elif first_char_is_capital == True and has_middle_capital == False:
         capitalized_correctly = True
     else:
         capitalized_correctly = False
@@ -102,41 +102,41 @@ def binary_sum(s1: str, s2: str) -> str:
     """Return the sum of two binary strings i.e. strings of 0s and 1s.
     Example: "100" + "1", return "101"
     """
-    total: str = ''
+    total: str = ""
 
-    # Ammend leading zeros to make the two strings of the same length for easier handling
+    # Amend leading zeros to make the two strings of the same length for easier handling
     s1_len = len(s1)
     s2_len = len(s2)
     if s1_len > s2_len:
-        s2 = '0' * (s1_len - s2_len) + s2
+        s2 = "0" * (s1_len - s2_len) + s2
     else:
-        s1 = '0' * (s2_len - s1_len) + s1
+        s1 = "0" * (s2_len - s1_len) + s1
 
-    carry = '0'
+    carry = "0"
     for i in range(len(s1) - 1, -1, -1):
-        if carry == '0':
-            if s1[i] == '0' and s2[i] == '0':
-                total = '0' + total
-            elif s1[i] == '1' and s2[i] == '0':
-                total = '1' + total
-            elif s1[i] == '0' and s2[i] == '1':
-                total = '1' + total
-            elif s1[i] == '1' and s2[i] == '1':
-                total = '0' + total
-                carry = '1'
+        if carry == "0":
+            if s1[i] == "0" and s2[i] == "0":
+                total = "0" + total
+            elif s1[i] == "1" and s2[i] == "0":
+                total = "1" + total
+            elif s1[i] == "0" and s2[i] == "1":
+                total = "1" + total
+            elif s1[i] == "1" and s2[i] == "1":
+                total = "0" + total
+                carry = "1"
         else:
-            if s1[i] == '0' and s2[i] == '0':
-                total = '1' + total
-                carry = '0'
-            elif s1[i] == '1' and s2[i] == '0':
-                total = '0' + total
-            elif s1[i] == '0' and s2[i] == '1':
-                total = '0' + total
-            elif s1[i] == '1' and s2[i] == '1':
-                total = '1' + total
+            if s1[i] == "0" and s2[i] == "0":
+                total = "1" + total
+                carry = "0"
+            elif s1[i] == "1" and s2[i] == "0":
+                total = "0" + total
+            elif s1[i] == "0" and s2[i] == "1":
+                total = "0" + total
+            elif s1[i] == "1" and s2[i] == "1":
+                total = "1" + total
 
-    if carry == '1':
-        total = '1' + total
+    if carry == "1":
+        total = "1" + total
 
     return total
 
@@ -146,10 +146,12 @@ def find_longest_common_prefix(arr: List[str]) -> str:
     Note: you may assume all strings only contain lowercase alphabetical characters."""
 
     low = 0
-    high = min([len(s) for s in arr])  # Get the length of the smallest string in the list
+    high = min(
+        [len(s) for s in arr]
+    )  # Get the length of the smallest string in the list
     num = len(arr)  # Number of strings in list
 
-    prefix: str = ''
+    prefix: str = ""
 
     for j in range(high):
         c = arr[0][j]
@@ -162,7 +164,7 @@ def find_longest_common_prefix(arr: List[str]) -> str:
 
 
 def is_valid_palindrome_with_removal(s: str) -> bool:
-    """Given a string and the ability to delete at most one character, 
+    """Given a string and the ability to delete at most one character,
     return whether or not it can form a palindrome.
     """
 
@@ -181,7 +183,7 @@ def is_valid_palindrome_with_removal(s: str) -> bool:
             right -= 1
         elif mismatch == 0:
             mismatch += 1
-            if is_palindrome(s[left + 1:right + 1]) or is_palindrome(s[left:right]):
+            if is_palindrome(s[left + 1 : right + 1]) or is_palindrome(s[left:right]):
                 palindrome_with_removal = True
                 break
             else:
@@ -190,7 +192,7 @@ def is_valid_palindrome_with_removal(s: str) -> bool:
 
     if mismatch == 0 and n % 2 == 0:
         mid = n // 2
-        if not is_palindrome(s[0:mid] + s[mid + 1:]):
+        if not is_palindrome(s[0:mid] + s[mid + 1 :]):
             palindrome_with_removal = False
 
     return palindrome_with_removal
@@ -200,7 +202,9 @@ def is_palindrome_recursive(s: str) -> bool:
     """Returns True if s is palindrome, False otherwise. Assumes s contains alphanumeric characters only."""
 
     n = len(s)
-    if n == 0 or n == 1:  # When you hit this terminal condition, it implicilty means all outer ones are True,
+    if (
+        n == 0 or n == 1
+    ):  # When you hit this terminal condition, it implicitly means all outer ones are True,
         return True  # that is why you reached here!!
 
     left = 0
@@ -209,7 +213,7 @@ def is_palindrome_recursive(s: str) -> bool:
     if s[left] != s[right]:
         return False
 
-    palindrome = is_palindrome_recursive(s[left + 1:right])
+    palindrome = is_palindrome_recursive(s[left + 1 : right])
 
     return palindrome
 
@@ -252,7 +256,7 @@ def jewels_and_stones(jewels: str, stones: str) -> int:
 
 
 def is_anagram(s: str, t: str) -> bool:
-    """ Given two strings s and t return whether or not s is an anagram of t.
+    """Given two strings s and t return whether or not s is an anagram of t.
     Note: An anagram is a word formed by reordering the letters of another word.
     """
 
@@ -269,7 +273,7 @@ def is_anagram(s: str, t: str) -> bool:
 
 
 def get_first_unique(s: str) -> int:
-    """Given a string, return the index of its first unique character. 
+    """Given a string, return the index of its first unique character.
     If a unique character does not exist, return -1.
     """
 
@@ -293,8 +297,8 @@ def get_first_unique(s: str) -> int:
 
 
 def spot_difference(s: str, t: str) -> str:
-    """ given two strings, s and t which only consist of lowercase letters. 
-    t is generated by shuffling the letters in s as well as potentially adding an additional random character. 
+    """given two strings, s and t which only consist of lowercase letters.
+    t is generated by shuffling the letters in s as well as potentially adding an additional random character.
     Return the letter that was randomly added to t if it exists, otherwise, return ''.
     """
 
@@ -307,7 +311,7 @@ def spot_difference(s: str, t: str) -> str:
         if c not in lookup:
             return c
 
-    return ''
+    return ""
 
 
 def get_intersection(nums1: List[int], nums2: List[int]) -> List[int]:
@@ -335,13 +339,12 @@ def get_uncommon_words(s: str, t: str) -> List[str]:
 
     s_words = {}
 
-    for word in s.split(' '):
+    for word in s.split(" "):
         s_words[word] = True
 
     t_words = {}
-    for word in t.split(' '):
+    for word in t.split(" "):
         t_words[word] = True
-
 
     uncommon_words = []
     for word in s_words.keys():
@@ -353,6 +356,7 @@ def get_uncommon_words(s: str, t: str) -> List[str]:
             uncommon_words.append(word)
 
     return uncommon_words
+
 
 ########################### main() ####################################################
 

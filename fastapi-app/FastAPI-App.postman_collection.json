@@ -1,0 +1,189 @@
+{
+  "info": {
+    "name": "FastAPI App",
+    "description": "Collection for testing FastAPI Blog application. Server runs at http://127.0.0.1:9000",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "Health",
+      "item": [
+        {
+          "name": "GET /health",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:9000/health",
+              "protocol": "http",
+              "host": ["127.0.0.1"],
+              "port": "9000",
+              "path": ["health"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Root",
+      "item": [
+        {
+          "name": "GET /",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:9000/",
+              "protocol": "http",
+              "host": ["127.0.0.1"],
+              "port": "9000",
+              "path": [""]
+            }
+          }
+        },
+        {
+          "name": "GET /about",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:9000/about",
+              "protocol": "http",
+              "host": ["127.0.0.1"],
+              "port": "9000",
+              "path": ["about"]
+            }
+          }
+        }
+      ]
+    },
+    {
+      "name": "Blogs",
+      "item": [
+        {
+          "name": "GET /blog",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:9000/blog?limit=10&published=true",
+              "protocol": "http",
+              "host": ["127.0.0.1"],
+              "port": "9000",
+              "path": ["blog"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Max number of blogs to return"
+                },
+                {
+                  "key": "published",
+                  "value": "true",
+                  "description": "Filter by published status (true/false or omit)"
+                },
+                {
+                  "key": "sort",
+                  "value": null,
+                  "description": "Sort field (optional)",
+                  "disabled": true
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /blog/unpublished",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:9000/blog/unpublished",
+              "protocol": "http",
+              "host": ["127.0.0.1"],
+              "port": "9000",
+              "path": ["blog", "unpublished"]
+            }
+          }
+        },
+        {
+          "name": "GET /blog/{id}",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:9000/blog/1",
+              "protocol": "http",
+              "host": ["127.0.0.1"],
+              "port": "9000",
+              "path": ["blog", ":id"],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "Blog ID"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "GET /blog/{id}/comments",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "http://127.0.0.1:9000/blog/1/comments?limit=10",
+              "protocol": "http",
+              "host": ["127.0.0.1"],
+              "port": "9000",
+              "path": ["blog", ":id", "comments"],
+              "query": [
+                {
+                  "key": "limit",
+                  "value": "10",
+                  "description": "Number of comments to return"
+                }
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "1",
+                  "description": "Blog ID"
+                }
+              ]
+            }
+          }
+        },
+        {
+          "name": "POST /blog",
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"My New Blog\",\n  \"body\": \"This is the blog content\",\n  \"published\": true\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "http://127.0.0.1:9000/blog",
+              "protocol": "http",
+              "host": ["127.0.0.1"],
+              "port": "9000",
+              "path": ["blog"]
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

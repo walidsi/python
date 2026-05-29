@@ -22,6 +22,16 @@ def get_session():
         yield session
 
 
+@app.get("/health")
+def health():
+    return {"status": "server is up and running"}
+
+
+@app.get("/health3")
+def health3():
+    return "Server Down"
+
+
 @app.get("/")
 def root(session: Session = Depends(get_session)):
     blogs = session.exec(select(models.Blog)).all()

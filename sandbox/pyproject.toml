@@ -1,0 +1,19 @@
+[project]
+name = "sandbox-project"
+version = "0.1.0"
+dependencies = [
+    "arrow>=1.4.0",
+    "faker>=40.1.0",
+    "icecream>=2.1.8",
+    "pyinputplus>=0.2.12",
+    "pywhatkit>=5.4",
+    "rich>=14.2.0",
+    "tenacity>=9.1.2",
+    "tqdm>=4.67.1",
+]
+
+[tool.ruff]
+line-length = 120
+
+[tool.pylint.format]
+max-line-length = "120"
