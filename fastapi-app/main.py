@@ -27,26 +27,6 @@ def health():
     return {"status": "server is up and running"}
 
 
-@app.get("/health3")
-def health3():
-    return "Server Down"
-
-
-@app.get("/health4")
-def health4():
-    return "Server Down"
-
-
-@app.get("/health5")
-def health5():
-    return "Hello world"
-
-
-@app.get("/health6")
-def health6():
-    return "I am the sixth route"
-
-
 @app.get("/")
 def root(session: Session = Depends(get_session)):
     blogs = session.exec(select(models.Blog)).all()
