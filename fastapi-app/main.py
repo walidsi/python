@@ -37,6 +37,10 @@ def health4():
     return "Server Down"
 
 
+@app.get("/health5")
+def health5():
+    return "Hello world"
+
 
 @app.get("/")
 def root(session: Session = Depends(get_session)):
