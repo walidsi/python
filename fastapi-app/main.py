@@ -37,6 +37,7 @@ def health4():
     return "Server Down"
 
 
+
 @app.get("/")
 def root(session: Session = Depends(get_session)):
     blogs = session.exec(select(models.Blog)).all()
