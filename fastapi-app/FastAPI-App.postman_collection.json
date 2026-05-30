@@ -4,22 +4,64 @@
     "description": "Collection for testing FastAPI Blog application. Server runs at http://127.0.0.1:9000",
     "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
   },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://127.0.0.1:9000"
+    },
+    {
+      "key": "blogId",
+      "value": "1"
+    }
+  ],
   "item": [
     {
       "name": "Health",
       "item": [
         {
           "name": "GET /health",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Database connected', () => {",
+                  "    const json = pm.response.json();",
+                  "    pm.expect(json.status).to.eql('ok');",
+                  "    pm.expect(json.database).to.eql('connected');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
           "request": {
             "method": "GET",
             "header": [],
-            "url": {
-              "raw": "http://127.0.0.1:9000/health",
-              "protocol": "http",
-              "host": ["127.0.0.1"],
-              "port": "9000",
-              "path": ["health"]
+            "url": "{{baseUrl}}/health"
+          }
+        },
+        {
+          "name": "GET /health2",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Process alive', () => {",
+                  "    pm.expect(pm.response.json().status).to.eql('alive');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
             }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/health2"
           }
         }
       ]
@@ -29,30 +71,42 @@
       "item": [
         {
           "name": "GET /",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Has data array', () => pm.expect(pm.response.json().data).to.be.an('array'));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
           "request": {
             "method": "GET",
             "header": [],
-            "url": {
-              "raw": "http://127.0.0.1:9000/",
-              "protocol": "http",
-              "host": ["127.0.0.1"],
-              "port": "9000",
-              "path": [""]
-            }
+            "url": "{{baseUrl}}/"
           }
         },
         {
           "name": "GET /about",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Has author', () => pm.expect(pm.response.json().Author).to.be.a('string'));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
           "request": {
             "method": "GET",
             "header": [],
-            "url": {
-              "raw": "http://127.0.0.1:9000/about",
-              "protocol": "http",
-              "host": ["127.0.0.1"],
-              "port": "9000",
-              "path": ["about"]
-            }
+            "url": "{{baseUrl}}/about"
           }
         }
       ]
@@ -61,102 +115,24 @@
       "name": "Blogs",
       "item": [
         {
-          "name": "GET /blog",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "http://127.0.0.1:9000/blog?limit=10&published=true",
-              "protocol": "http",
-              "host": ["127.0.0.1"],
-              "port": "9000",
-              "path": ["blog"],
-              "query": [
-                {
-                  "key": "limit",
-                  "value": "10",
-                  "description": "Max number of blogs to return"
-                },
-                {
-                  "key": "published",
-                  "value": "true",
-                  "description": "Filter by published status (true/false or omit)"
-                },
-                {
-                  "key": "sort",
-                  "value": null,
-                  "description": "Sort field (optional)",
-                  "disabled": true
-                }
-              ]
-            }
-          }
-        },
-        {
-          "name": "GET /blog/unpublished",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "http://127.0.0.1:9000/blog/unpublished",
-              "protocol": "http",
-              "host": ["127.0.0.1"],
-              "port": "9000",
-              "path": ["blog", "unpublished"]
-            }
-          }
-        },
-        {
-          "name": "GET /blog/{id}",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "http://127.0.0.1:9000/blog/1",
-              "protocol": "http",
-              "host": ["127.0.0.1"],
-              "port": "9000",
-              "path": ["blog", ":id"],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": "1",
-                  "description": "Blog ID"
-                }
-              ]
-            }
-          }
-        },
-        {
-          "name": "GET /blog/{id}/comments",
-          "request": {
-            "method": "GET",
-            "header": [],
-            "url": {
-              "raw": "http://127.0.0.1:9000/blog/1/comments?limit=10",
-              "protocol": "http",
-              "host": ["127.0.0.1"],
-              "port": "9000",
-              "path": ["blog", ":id", "comments"],
-              "query": [
-                {
-                  "key": "limit",
-                  "value": "10",
-                  "description": "Number of comments to return"
-                }
-              ],
-              "variable": [
-                {
-                  "key": "id",
-                  "value": "1",
-                  "description": "Blog ID"
-                }
-              ]
-            }
-          }
-        },
-        {
           "name": "POST /blog",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 201', () => pm.response.to.have.status(201));",
+                  "const json = pm.response.json();",
+                  "pm.test('Has timestamps', () => {",
+                  "    pm.expect(json.data.created_at).to.be.a('string');",
+                  "    pm.expect(json.data.updated_at).to.be.a('string');",
+                  "});",
+                  "pm.collectionVariables.set('blogId', String(json.data.id));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
           "request": {
             "method": "POST",
             "header": [
@@ -167,20 +143,152 @@
             ],
             "body": {
               "mode": "raw",
-              "raw": "{\n  \"title\": \"My New Blog\",\n  \"body\": \"This is the blog content\",\n  \"published\": true\n}",
+              "raw": "{\n  \"title\": \"Newman Test Blog\",\n  \"body\": \"Created by Newman collection run\",\n  \"published\": true\n}",
               "options": {
                 "raw": {
                   "language": "json"
                 }
               }
             },
-            "url": {
-              "raw": "http://127.0.0.1:9000/blog",
-              "protocol": "http",
-              "host": ["127.0.0.1"],
-              "port": "9000",
-              "path": ["blog"]
+            "url": "{{baseUrl}}/blog"
+          }
+        },
+        {
+          "name": "GET /blog",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Has data array', () => pm.expect(pm.response.json().data).to.be.an('array'));"
+                ],
+                "type": "text/javascript"
+              }
             }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/blog?limit=10&published=true"
+          }
+        },
+        {
+          "name": "GET /blog/unpublished",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Has data array', () => pm.expect(pm.response.json().data).to.be.an('array'));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/blog/unpublished"
+          }
+        },
+        {
+          "name": "GET /blog/{id}",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Returns created blog', () => {",
+                  "    const json = pm.response.json();",
+                  "    pm.expect(String(json.data.id)).to.eql(pm.collectionVariables.get('blogId'));",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/blog/{{blogId}}"
+          }
+        },
+        {
+          "name": "GET /blog/{id}/comments",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Has comments array', () => pm.expect(pm.response.json().comments).to.be.an('array'));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": "{{baseUrl}}/blog/{{blogId}}/comments?limit=10"
+          }
+        },
+        {
+          "name": "PATCH /blog/{id}",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 200', () => pm.response.to.have.status(200));",
+                  "pm.test('Title updated', () => {",
+                  "    pm.expect(pm.response.json().data.title).to.eql('Newman Updated Blog');",
+                  "});"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "PATCH",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"title\": \"Newman Updated Blog\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/blog/{{blogId}}"
+          }
+        },
+        {
+          "name": "DELETE /blog/{id}",
+          "event": [
+            {
+              "listen": "test",
+              "script": {
+                "exec": [
+                  "pm.test('Status is 204', () => pm.response.to.have.status(204));"
+                ],
+                "type": "text/javascript"
+              }
+            }
+          ],
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": "{{baseUrl}}/blog/{{blogId}}"
           }
         }
       ]
