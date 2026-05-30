@@ -27,6 +27,11 @@ def health():
     return {"status": "server is up and running"}
 
 
+@app.get("/health2")
+def health2():
+    return "server down"
+
+
 @app.get("/")
 def root(session: Session = Depends(get_session)):
     blogs = session.exec(select(models.Blog)).all()
