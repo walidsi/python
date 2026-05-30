@@ -54,6 +54,7 @@ The container serves the app on `http://127.0.0.1:8000`.
 | Method | Endpoint | Description |
 |--------|---------|-------------|
 | GET | `/health` | Health check endpoint |
+| GET | `/health2` | Secondary health check (reports server down) |
 | GET | `/` | Get all blogs |
 | GET | `/blog` | Get blogs with optional `limit` and `published` filters |
 | GET | `/blog/unpublished` | Get unpublished blogs |
