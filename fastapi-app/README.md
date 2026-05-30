@@ -4,9 +4,11 @@ A FastAPI-based web application that implements a small blog API with SQLModel a
 
 ## Features
 
-- Create blog posts
+- Create, update, and delete blog posts
 - Read all blog posts or fetch a single post by ID
 - Filter blog posts by publication status
+- `created_at` and `updated_at` timestamps on each post
+- Readiness and liveness health endpoints
 - Auto-create the SQLite schema on application startup
 - Docker support for containerized runs
 - Automatically generated OpenAPI documentation
@@ -53,14 +55,16 @@ The container serves the app on `http://127.0.0.1:8000`.
 
 | Method | Endpoint | Description |
 |--------|---------|-------------|
-| GET | `/health` | Health check endpoint |
-| GET | `/health2` | Secondary health check (reports server down) |
+| GET | `/health` | Readiness check (verifies database connectivity) |
+| GET | `/health2` | Liveness check (process only, no database check) |
 | GET | `/` | Get all blogs |
 | GET | `/blog` | Get blogs with optional `limit` and `published` filters |
 | GET | `/blog/unpublished` | Get unpublished blogs |
 | GET | `/blog/{id}` | Get a specific blog by ID |
 | GET | `/blog/{id}/comments` | Get placeholder comments for a blog |
 | POST | `/blog` | Create a new blog |
+| PATCH | `/blog/{id}` | Update a blog (partial body: `title`, `body`, `published`) |
+| DELETE | `/blog/{id}` | Delete a blog |
 | GET | `/about` | Get author information |
 
 `/blog` currently accepts a `sort` query parameter, but it is not applied by the implementation yet.
