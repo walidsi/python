@@ -37,21 +37,6 @@ def health3():
     return "health is good"
 
 
-@app.get("/health4")
-def health4():
-    return "health is not good"
-
-
-@app.get("/health5")
-def health5():
-    return "health is not good"
-
-
-@app.get("/health6")
-def health6():
-    return "health is not good"
-
-
 @app.get("/health7")
 def health7():
     return "health is not good"
