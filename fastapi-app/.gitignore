@@ -1,1 +1,3 @@
 nul
+# Note: ".." patterns don't work in .gitignore.
+# Parent/sibling folder ignores are in the repo-root .gitignore instead.
