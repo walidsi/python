@@ -17,7 +17,7 @@
 - `DB_ECHO` enables SQLAlchemy statement logging when set to `1`, `true`, or `yes`
 - SQLModel models use a three-class pattern: `BlogBase` → `BlogCreate` / `BlogUpdate` / `BlogRead` → `Blog` (table)
 - `Blog` has `created_at` and `updated_at` (UTC); `init_db` migrates missing columns on existing SQLite DBs
-- `/health` is readiness (DB `SELECT 1`); `/health2` is liveness (no DB check)
+- `/health` is readiness (DB `SELECT 1`);
 
 ## Conventions
 - Keep Pydantic/SQLModel response and request schemas separate from the table model

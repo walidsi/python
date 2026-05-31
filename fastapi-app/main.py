@@ -40,13 +40,6 @@ def health(session: Session = Depends(get_session)):
         ) from exc
     return {"status": "ok", "database": "connected"}
 
-
-@app.get("/health2")
-def health2():
-    """Liveness probe: confirms the process is running (no database check)."""
-    return {"status": "alive"}
-
-
 @app.get("/")
 def root(session: Session = Depends(get_session)):
     blogs = session.exec(select(models.Blog)).all()

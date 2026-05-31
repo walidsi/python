@@ -40,40 +40,6 @@
                 }
               }
             ]
-          },
-          {
-            "id": "96f82ca7-10be-4676-859c-f410a571eb7b",
-            "name": "GET /health2",
-            "request": {
-              "url": {
-                "path": [
-                  "health2"
-                ],
-                "host": [
-                  "{{baseUrl}}"
-                ],
-                "query": [],
-                "variable": []
-              },
-              "method": "GET"
-            },
-            "response": [],
-            "event": [
-              {
-                "listen": "test",
-                "script": {
-                  "id": "0966dd7d-1859-4cf5-8d77-659dd68ebd1b",
-                  "type": "text/javascript",
-                  "exec": [
-                    "pm.test('Status is 200', () => pm.response.to.have.status(200));",
-                    "pm.test('Process alive', () => {",
-                    "    pm.expect(pm.response.json().status).to.eql('alive');",
-                    "});"
-                  ],
-                  "_lastExecutionId": "359cf675-f113-4d21-bd9f-ab0805ead0e9"
-                }
-              }
-            ]
           }
         ],
         "event": []

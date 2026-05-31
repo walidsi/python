@@ -56,7 +56,6 @@ The container serves the app on `http://127.0.0.1:8000`.
 | Method | Endpoint | Description |
 |--------|---------|-------------|
 | GET | `/health` | Readiness check (verifies database connectivity) |
-| GET | `/health2` | Liveness check (process only, no database check) |
 | GET | `/` | Get all blogs |
 | GET | `/blog` | Get blogs with optional `limit` and `published` filters |
 | GET | `/blog/unpublished` | Get unpublished blogs |
