@@ -4,8 +4,6 @@
         "sqlite": {
             "type": "local",
             "command": [
-                "cmd.exe",
-                "/c",
                 "uvx",
                 "mcp-server-sqlite",
                 "--db-path",
