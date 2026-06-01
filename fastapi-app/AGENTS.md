@@ -29,3 +29,6 @@ When writing code:
 Python execution:
 - Use `uv run python` to run Python applications and scripts
 
+Shell:
+- Always run terminal commands in Git Bash
+
