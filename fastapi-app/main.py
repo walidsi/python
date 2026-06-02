@@ -112,7 +112,7 @@ def delete_blog(id: int, session: Session = Depends(get_session)):
 
 @app.get("/about")
 def about():
-    return {"Author": "Walid Ismail"}
+    return {"Author": "Walid Ismail 2"}
 
 
 if __name__ == "__main__":
