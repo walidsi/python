@@ -2,33 +2,43 @@
 	"version": "2.0.0",
 	"tasks": [
 		{
-			"type": "docker-build",
 			"label": "docker-build",
-			"platform": "python",
-			"dockerBuild": {
-				"tag": "fastapi:latest",
-				"dockerfile": "${workspaceFolder}/Dockerfile",
-				"context": "${workspaceFolder}",
-				"pull": true
-			}
+			"type": "process",
+			"command": "docker",
+			"args": [
+				"build",
+				"--pull",
+				"-t",
+				"fastapi:latest",
+				"-f",
+				"${workspaceFolder}/Dockerfile",
+				"${workspaceFolder}"
+			],
+			"group": "build",
+			"problemMatcher": []
 		},
 		{
-			"type": "docker-run",
 			"label": "docker-run: debug",
+			"type": "process",
 			"dependsOn": [
 				"docker-build"
 			],
-			"python": {
-				"args": [
-					"main:app",
-					"--host",
-					"0.0.0.0",
-					"--port",
-					"8000",
-					"--reload" // monitor changes in files and update site with a refresh
-				],
-				"module": "uvicorn"
-			}
+			"command": "docker",
+			"args": [
+				"run",
+				"--rm",
+				"-p",
+				"8000:8000",
+				"fastapi:latest",
+				"uvicorn",
+				"main:app",
+				"--host",
+				"0.0.0.0",
+				"--port",
+				"8000",
+				"--reload"
+			],
+			"problemMatcher": []
 		}
 	]
 }

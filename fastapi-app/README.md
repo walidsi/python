@@ -51,6 +51,8 @@ docker run -p 8000:8000 fastapi-app
 
 The container serves the app on `http://127.0.0.1:8000`.
 
+VS Code also includes standard process tasks for building the `fastapi:latest` image and running it on port `8000`.
+
 ## API Endpoints
 
 | Method | Endpoint | Description |

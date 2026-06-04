@@ -11,6 +11,7 @@
 - Run Python via `uv run python`
 - DB schema is auto-initialized via the FastAPI `lifespan` context manager on startup
 - Docker image exposes port `8000` and runs as non-root user `appuser`
+- VS Code Docker build/run tasks are standard `process` tasks that call the Docker CLI directly
 
 ## Database
 - SQLite file: `blogs.db` (auto-created on startup)
